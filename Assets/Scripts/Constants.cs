@@ -4,5 +4,6 @@ using UnityEngine;
 
 public enum Tetrimino
 {
-    T, J, L, O, I, S, Z
+    T, J, L, O, I, S, Z,
+    Single
 }

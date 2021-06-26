@@ -6,34 +6,45 @@ public class Piece : MonoBehaviour
 {
     public Tetrimino Tetrimino;
     public Tile TilePrefab;
-    public Grid grid;
+    public Grid Grid;
 
     [HideInInspector]
-    public Tile[] Tiles = new Tile[4];
+    public List<Tile> Tiles = new List<Tile>();
 
     private int rotationIndex = 0;
     public PieceGridLocator pieceGridLocator;
 
-    private void Start()
+    private void Awake()
     {
         pieceGridLocator = new PieceGridLocator()
         {
-            grid = grid,
+            grid = Grid,
             piece = this,
             transform = transform
         };
-        InitializePiece(Tetrimino);
     }
 
     public void InitializePiece(Tetrimino tetrimino)
     {
+        Tetrimino = tetrimino;
+        rotationIndex = 0;
         var layout = TetriminoLogic.Layouts[tetrimino];
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < Tiles.Count; i++)
         {
-            Tiles[i] = Instantiate(TilePrefab, transform);
-            Tiles[i].Collider.localPosition = new Vector3(layout[i].x, layout[i].y, transform.position.z);
-            Tiles[i].Display.transform.localPosition = new Vector3(layout[i].x, layout[i].y, transform.position.z);
-            Tiles[i].Display.GetComponent<TetriminoCell>().SetTetrimino(tetrimino);
+            if (Tiles[i] != null)
+            {
+                Destroy(Tiles[i].gameObject);
+            }
+        }
+        Tiles = new List<Tile>();
+        for (int i = 0; i < layout.Length; i++)
+        {
+            var tile = Instantiate(TilePrefab, transform);
+            tile.Collider.localPosition = new Vector3(layout[i].x, layout[i].y, transform.position.z);
+            tile.Display.transform.localPosition = new Vector3(layout[i].x, layout[i].y, transform.position.z);
+            tile.Display.GetComponent<TetriminoCell>().SetTetrimino(tetrimino);
+            tile.InitializeValues();
+            Tiles.Add(tile);
         }
 
         // Add face to pivot
@@ -42,7 +53,7 @@ public class Piece : MonoBehaviour
 
         // Set ground checkers in parent
         transform.parent.GetComponent<PlayerMovement>()
-            .SetCheckers(Tiles.SelectMany(tile => tile.GetComponent<PlayerTile>().groundCheckers).ToArray());
+            .SetCheckers(Tiles.SelectMany(tile => tile.GetComponent<PlayerTile>().groundCheckers).ToList());
     }
 
     public void Rotate(bool rotationDirection)
@@ -59,12 +70,12 @@ public class Piece : MonoBehaviour
             rotationIndex = (rotationIndex + 3) % 4;
         }
         var originPosition = new Vector2Int(Mathf.RoundToInt(Tiles[0].CurrentPosition.x), Mathf.RoundToInt(Tiles[0].CurrentPosition.y));
-        for (int i = 1; i < 4; i++)
+        for (int i = 1; i < Tiles.Count; i++)
         {
             Tiles[i].Rotate(originPosition, rotationDirection);
         }
         var success = Offset(oldRotationIndex, rotationIndex);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < Tiles.Count; i++)
         {
             if (success)
             {
@@ -82,7 +93,7 @@ public class Piece : MonoBehaviour
         if (Tetrimino == Tetrimino.O)
         {
             var offset = TetriminoLogic.OPieceOffsetData[oldRotationIndex] - TetriminoLogic.OPieceOffsetData[newRotationIndex];
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Tiles.Count; i++)
             {
                 Tiles[i].Offset(offset);
             }
@@ -98,15 +109,15 @@ public class Piece : MonoBehaviour
             for (int c = 0; c < 5; c++)
             {
                 var offset = offsetData[oldRotationIndex, c] - offsetData[newRotationIndex, c];
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < Tiles.Count; i++)
                 {
                     Tiles[i].Offset(offset);
                 }
-                if (grid.TestPlayer(pieceGridLocator.GlobalNextTilesPositions()))
+                if (Grid.IsSpaceAvailable(pieceGridLocator.GlobalNextTilesPositions()))
                 {
                     return true;
                 }
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < Tiles.Count; i++)
                 {
                     Tiles[i].Offset(-offset);
                 }
@@ -127,7 +138,8 @@ public static class TetriminoLogic
         [Tetrimino.Z] = new Vector2Int[4] { new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(1, 1), new Vector2Int(2, 0) },
         [Tetrimino.I] = new Vector2Int[4] { new Vector2Int(1, 0), new Vector2Int(0, 0), new Vector2Int(2, 0), new Vector2Int(3, 0) },
         [Tetrimino.O] = new Vector2Int[4] { new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(1, 1) },
-        [Tetrimino.J] = new Vector2Int[4] { new Vector2Int(1, 0), new Vector2Int(0, 0), new Vector2Int(0, 1), new Vector2Int(2, 0) }
+        [Tetrimino.J] = new Vector2Int[4] { new Vector2Int(1, 0), new Vector2Int(0, 0), new Vector2Int(0, 1), new Vector2Int(2, 0) },
+        [Tetrimino.Single] = new Vector2Int[1] { new Vector2Int(0, 0) }
     };
 
     public static readonly Vector2Int[,] DefaultOffsetData = new Vector2Int[4, 5] {

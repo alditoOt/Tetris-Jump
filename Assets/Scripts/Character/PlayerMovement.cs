@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public float offsetX = 0.7f;
     public float radius = 0.1f;
     public LayerMask groundLayer;
-    public Transform[] groundCheckers = new Transform[4];
+    public List<Transform> groundCheckers = new List<Transform>();
 
     #endregion jump
 
@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(new Vector2(checker.position.x + offsetX, checker.position.y + offsetY), radius, groundLayer);
     }
 
-    public void SetCheckers(Transform[] checkers)
+    public void SetCheckers(List<Transform> checkers)
     {
         groundCheckers = checkers;
     }

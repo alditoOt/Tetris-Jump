@@ -56,6 +56,9 @@ public class TetriminoCell : MonoBehaviour
                 case Tetrimino.O:
                     sprite = O;
                     break;
+
+                default:
+                    break;
             }
         }
         sr.sprite = sprite;

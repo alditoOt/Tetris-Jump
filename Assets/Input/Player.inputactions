@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Place",
+                    "type": "Button",
+                    "id": "c6a545d6-2119-4647-8d46-795c404744c6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -135,6 +143,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "RotateRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c69fcdad-b299-4038-a23c-c513a65ab89e",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Place",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

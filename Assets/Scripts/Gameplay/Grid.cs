@@ -14,7 +14,7 @@ public class Grid : MonoBehaviour
     private TetrisGrid PreviousTetrisGrid;
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         Blocks = TestBlocks.Select(block => new Tuple<int, int>(Mathf.RoundToInt(block.x), Mathf.RoundToInt(block.y))).ToList();
         TetrisGrid = new TetrisGrid(Blocks);
@@ -27,8 +27,11 @@ public class Grid : MonoBehaviour
                 Cells[i, j].transform.localPosition = new Vector3(j, i, transform.position.z);
             }
         }
+    }
+
+    private void Start()
+    {
         RenderGrid();
-        CheckForLines();
     }
 
     public void CheckForLines()
@@ -81,23 +84,40 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void LocatePlayer(List<Vector2Int> positions, Tetrimino tetrimino)
+    public void UpdatePreview(List<Vector2Int> positions, Tetrimino tetrimino)
     {
+        PreviousTetrisGrid = TetrisGrid.Copy();
         TetrisGrid.ClearPreviews();
         TetrisGrid.SetPoints(positions, tetrimino, false, true);
         RenderGrid();
+        PreviousTetrisGrid = null;
     }
 
-    public bool TestPlayer(List<Vector2Int> positions)
+    public void PlaceBlocks(List<Vector2Int> positions, Tetrimino tetrimino)
+    {
+        PreviousTetrisGrid = TetrisGrid.Copy();
+        TetrisGrid.ClearPreviews();
+        TetrisGrid.SetPoints(positions, tetrimino, true, false);
+        RenderGrid();
+        CheckForLines();
+        PreviousTetrisGrid = null;
+    }
+
+    public bool IsSpaceAvailable(List<Vector2Int> positions)
     {
         return TetrisGrid.CheckSpace(positions);
+    }
+
+    public List<Vector2Int> GetLowestPoints(List<Vector2Int> positions)
+    {
+        return TetrisGrid.GetLowestPoints(positions);
     }
 }
 
 public class TetrisGrid
 {
     public static readonly int WIDTH = 10;
-    public static readonly int HEIGHT = 20;
+    public static readonly int HEIGHT = 25;
 
     private TetrisCell[,] Cells;
 
@@ -129,41 +149,22 @@ public class TetrisGrid
 
     public void SetPoints(List<Vector2Int> points, Tetrimino tetrimino, bool isPresent = false, bool isPreview = false)
     {
-        foreach (var point in points)
+        if (IsOutOfBounds(points))
         {
-            if (point.x < 0 || point.y < 0
-                || point.x >= WIDTH || point.y >= HEIGHT)
-            {
-                return;
-            }
+            // Do nothing
+            return;
         }
-        var offset = 0;
-        //while (offset < HEIGHT)
-        //{
-        //    var hasCollided = false;
-        //    foreach (var point in points)
-        //    {
-        //        if (point.y - offset <= 0 || Cells[point.y - offset - 1, point.x].Present)
-        //        {
-        //            hasCollided = true;
-        //            break;
-        //        }
-        //    }
-        //    if (hasCollided)
-        //    {
-        //        break;
-        //    }
-        //    offset++;
-        //}
-        foreach (var point in points)
+
+        var lowest = GetLowestPoints(points);
+        foreach (var point in lowest)
         {
-            if (isPreview && !Cells[point.y - offset, point.x].Present)
+            if (isPreview && !Cells[point.y, point.x].Present)
             {
-                Cells[point.y - offset, point.x].SetPreview(tetrimino);
+                Cells[point.y, point.x].SetPreview(tetrimino);
             }
             else if (isPresent)
             {
-                Cells[point.y - offset, point.x].SetValue(tetrimino);
+                Cells[point.y, point.x].SetValue(tetrimino);
             }
         }
     }
@@ -172,8 +173,7 @@ public class TetrisGrid
     {
         return points.All(point =>
         {
-            return point.x >= 0 && point.y >= 0
-                && point.x < WIDTH && point.y < HEIGHT && !Cells[point.y, point.x].Present;
+            return !IsOutOfBounds(point.x, point.y) && !Cells[point.y, point.x].Present;
         });
     }
 
@@ -206,7 +206,7 @@ public class TetrisGrid
 
     public void DestroyLines(List<int> indexes)
     {
-        foreach (var index in indexes)
+        foreach (var index in indexes.OrderByDescending(i => i))
         {
             for (int j = 0; j < WIDTH; j++)
             {
@@ -255,6 +255,40 @@ public class TetrisGrid
                 }
             }
         }
+    }
+
+    private bool IsOutOfBounds(int x, int y)
+    {
+        return x < 0 || y < 0
+                || x >= WIDTH || y >= HEIGHT;
+    }
+
+    private bool IsOutOfBounds(List<Vector2Int> points)
+    {
+        return points.Any(point => IsOutOfBounds(point.x, point.y));
+    }
+
+    public List<Vector2Int> GetLowestPoints(List<Vector2Int> points)
+    {
+        var offset = 0;
+        while (offset < HEIGHT)
+        {
+            var hasCollided = false;
+            foreach (var point in points)
+            {
+                if (point.y - offset <= 0 || Cells[point.y - offset - 1, point.x].Present)
+                {
+                    hasCollided = true;
+                    break;
+                }
+            }
+            if (hasCollided)
+            {
+                break;
+            }
+            offset++;
+        }
+        return points.Select(point => new Vector2Int(point.x, point.y - offset)).ToList();
     }
 }
 

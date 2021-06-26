@@ -12,6 +12,11 @@ public class Tile : MonoBehaviour
 
     public void Start()
     {
+        InitializeValues();
+    }
+
+    public void InitializeValues()
+    {
         CurrentPosition = new Vector2(Mathf.RoundToInt(Collider.localPosition.x), Mathf.RoundToInt(Collider.localPosition.y));
         NextPosition = CurrentPosition;
     }

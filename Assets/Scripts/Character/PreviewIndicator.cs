@@ -15,6 +15,6 @@ public class PreviewIndicator : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        piece.grid.LocatePlayer(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino);
+        piece.Grid.UpdatePreview(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino);
     }
 }
