@@ -19,6 +19,9 @@ public class Grid : MonoBehaviour
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI linesAmount;
     public TextMeshProUGUI tetrisFX;
+    public TextMeshProUGUI single;
+    public TextMeshProUGUI doubleLine;
+    public TextMeshProUGUI triple;
 
     // Start is called before the first frame update
     private void Awake()
@@ -68,14 +71,17 @@ public class Grid : MonoBehaviour
                 case 1:
                     points += 40;
                     totalLines += 1;
+                    single.gameObject.SetActive(true);
                     break;
                 case 2:
                     points += 100;
                     totalLines += 2;
+                    doubleLine.gameObject.SetActive(true);
                     break;
                 case 3:
                     points += 300;
                     totalLines += 3;
+                    triple.gameObject.SetActive(true);
                     break;
                 case 4:
                     points += 1200;
