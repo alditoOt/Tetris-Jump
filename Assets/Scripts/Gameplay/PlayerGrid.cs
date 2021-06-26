@@ -13,15 +13,19 @@ public class PlayerGrid : MonoBehaviour
     public void RespawnPiece(PlayerPiece piece, float cooldown)
     {
         piece.transform.position = StartPoint.position;
-        // To-do: Handle correct initialization of pieces
+        // To-do: Use another class to handle correct generation of pieces, as well as showing them on UI
         piece.Piece.InitializePiece(GetRandomTetrimino());
         var currentPoint = piece.Piece.pieceGridLocator.GlobalCurrentTilesPositions();
         var lowestPoint = piece.Piece.Grid.GetLowestPoints(currentPoint);
         var offset = lowestPoint[0].y - currentPoint[0].y;
         var newPos = new Vector2(piece.transform.position.x, piece.transform.position.y + offset);
         piece.transform.position = newPos;
-        Debug.Log(newPos);
-        //piece.Piece.InitializePiece(Tetrimino.O);
+        var height = newPos.y - piece.Piece.Grid.transform.position.y;
+        if (height >= TetrisGrid.VISUAL_HEIGHT)
+        {
+            Debug.Log("F");
+            // TO-DO: Lose the game
+        }
         Countdown.DOKill();
         Countdown.fillAmount = 1;
         Countdown.color = Color.white;

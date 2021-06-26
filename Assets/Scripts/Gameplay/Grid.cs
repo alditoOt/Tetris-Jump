@@ -12,6 +12,7 @@ public class Grid : MonoBehaviour
     private List<Tuple<int, int>> Blocks;
     private TetrisGrid TetrisGrid;
     private TetrisGrid PreviousTetrisGrid;
+    private int Combo;
 
     // Start is called before the first frame update
     private void Awake()
@@ -25,8 +26,13 @@ public class Grid : MonoBehaviour
             {
                 Cells[i, j] = Instantiate(CellPrefab, transform);
                 Cells[i, j].transform.localPosition = new Vector3(j, i, transform.position.z);
+                if (i >= TetrisGrid.VISUAL_HEIGHT)
+                {
+                    Cells[i, j].SetInvisible();
+                }
             }
         }
+        Combo = 0;
     }
 
     private void Start()
@@ -43,15 +49,24 @@ public class Grid : MonoBehaviour
     private void DestroyLines(List<int> indexes)
     {
         int numberOfLines = indexes.Count;
-        PreviousTetrisGrid = TetrisGrid.Copy();
-        // TO-DO: Handle points for different number of completed lines
-        // 1: SIMPLE
-        // 2: DOUBLE
-        // 3: TRIPLE
-        // 4: TETRIS OMG
-        TetrisGrid.DestroyLines(indexes);
-        RenderGrid();
-        PreviousTetrisGrid = null;
+        if (numberOfLines == 0)
+        {
+            Combo = 0;
+        }
+        else
+        {
+            Combo++;
+            PreviousTetrisGrid = TetrisGrid.Copy();
+            // TO-DO: Handle points for different number of completed lines
+            // 1: SIMPLE
+            // 2: DOUBLE
+            // 3: TRIPLE
+            // 4: TETRIS OMG
+            // Using the Combo variable could be great too
+            TetrisGrid.DestroyLines(indexes);
+            RenderGrid();
+            PreviousTetrisGrid = null;
+        }
     }
 
     private void RenderGrid()
@@ -118,6 +133,7 @@ public class TetrisGrid
 {
     public static readonly int WIDTH = 10;
     public static readonly int HEIGHT = 25;
+    public static readonly int VISUAL_HEIGHT = 20;
 
     private TetrisCell[,] Cells;
 

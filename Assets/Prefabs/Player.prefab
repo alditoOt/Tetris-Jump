@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 328761860573544170}
   - component: {fileID: 1975258537}
+  - component: {fileID: 440837850}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -43,8 +44,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06451e1bb2bd924db9ca4f89acca0ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tetrimino: 2
+  Tetrimino: 7
   TilePrefab: {fileID: 1258581929, guid: 98ca6f7c5756ba94bba48f21ccf4ef52, type: 3}
+  Grid: {fileID: 0}
+  Tiles: []
+--- !u!114 &440837850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328761860573544173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7c9ea724c1a6944bf4b8832ea2e8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &328761861832304907
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +141,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
@@ -144,7 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
-  speed: 7
+  speed: 2
+  airSpeed: 7
   facingLeft: 1
   jump: 17
   jumping: 0
@@ -175,3 +191,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Piece: {fileID: 1975258537}
+  Grid: {fileID: 0}
