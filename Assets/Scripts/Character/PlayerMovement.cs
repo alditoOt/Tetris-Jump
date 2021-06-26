@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-    private Animator anim;
+    //private Animator anim;
 
     #region walk
 
@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public bool jumping = false;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
+    public float jumpMultiplier = 5f;
 
     public bool isOnGround = false;
     public float height = 0.7f;
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -62,15 +63,15 @@ public class PlayerMovement : MonoBehaviour
     public void DoMove()
     {
         rb.velocity = new Vector2(move.x * speed, rb.velocity.y);
-        anim.SetFloat("horizontalSpeed", Mathf.Abs(rb.velocity.x));
-        if (rb.velocity.x < 0)
+       // anim.SetFloat("horizontalSpeed", Mathf.Abs(rb.velocity.x));
+        /*if (rb.velocity.x < 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         else if (rb.velocity.x > 0)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
-        }
+        }*/
     }
 
     #endregion walking
@@ -86,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
     private void CheckGround()
     {
         isOnGround = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y - height), radius, groundLayer);
-        anim.SetBool("isOnGround", isOnGround);
+       // anim.SetBool("isOnGround", isOnGround);
     }
 
     private void OnJump(InputValue value)
@@ -95,9 +96,9 @@ public class PlayerMovement : MonoBehaviour
         if (jumping && isOnGround)
         {
             rb.velocity = new Vector2(rb.velocity.x, jump);
-            anim.ResetTrigger("jumping");
-            anim.SetTrigger("jumping");
-            AudioManager.Instance.Play("Jump");
+           // anim.ResetTrigger("jumping");
+            //anim.SetTrigger("jumping");
+            //AudioManager.Instance.Play("Jump");
         }
     }
 
@@ -111,7 +112,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        anim.SetFloat("verticalSpeed", rb.velocity.y);
+        else if (rb.velocity.y > 0 && jumping)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpMultiplier - 1) * Time.deltaTime;
+        }
+       // anim.SetFloat("verticalSpeed", rb.velocity.y);
     }
 
     #endregion jumping
@@ -127,11 +132,11 @@ public class PlayerMovement : MonoBehaviour
             }
             frozen = true;
             transform.position = new Vector3(frozenX, frozenY, transform.position.z);
-            anim.SetBool("freeze", true);
+           // anim.SetBool("freeze", true);
         }
         else
         {
-            anim.SetBool("freeze", false);
+           // anim.SetBool("freeze", false);
             frozen = false;
         }
     }
