@@ -27,6 +27,7 @@ public class Grid : MonoBehaviour
                 Cells[i, j].transform.localPosition = new Vector3(j, i, transform.position.z);
             }
         }
+        RenderGrid();
         CheckForLines();
     }
 
@@ -67,7 +68,7 @@ public class Grid : MonoBehaviour
         {
             if (cell.Present)
             {
-                Cells[y, x].SetBlock();
+                Cells[y, x].SetBlock(cell.Tetrimino);
             }
             else
             {
@@ -180,17 +181,42 @@ public class TetrisGrid
 public class TetrisCell
 {
     public bool Present { get; set; }
+    public Tetrimino? Tetrimino { get; set; }
 
     public void Clear()
     {
         Present = false;
+        Tetrimino = null;
     }
 
     public TetrisCell Copy()
     {
         return new TetrisCell()
         {
-            Present = this.Present
+            Present = Present,
+            Tetrimino = Tetrimino
         };
+    }
+
+    public override bool Equals(object obj)
+    {
+        //Check for null and compare run-time types.
+        if ((obj == null) || !GetType().Equals(obj.GetType()))
+        {
+            return false;
+        }
+        else
+        {
+            TetrisCell p = (TetrisCell)obj;
+            return Present == p.Present && Tetrimino.Equals(p.Tetrimino);
+        }
+    }
+
+    public override int GetHashCode()
+    {
+        int hashCode = 367770434;
+        hashCode = hashCode * -1521134295 + Present.GetHashCode();
+        hashCode = hashCode * -1521134295 + Tetrimino.GetHashCode();
+        return hashCode;
     }
 }

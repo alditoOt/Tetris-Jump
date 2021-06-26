@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    public GameObject Block;
-    public GameObject Preview;
+    public TetriminoCell Block;
+    public TetriminoCell Preview;
 
-    public void SetBlock()
+    public void SetBlock(Tetrimino? tetrimino)
     {
         Block.gameObject.SetActive(true);
+        Block.SetTetrimino(tetrimino);
         Preview.gameObject.SetActive(false);
     }
 
-    public void SetPreview()
+    public void SetPreview(Tetrimino? tetrimino)
     {
         Block.gameObject.SetActive(false);
         Preview.gameObject.SetActive(true);
+        Preview.SetTetrimino(tetrimino);
     }
 
     public void Clear()

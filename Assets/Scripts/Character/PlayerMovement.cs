@@ -27,7 +27,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpMultiplier = 5f;
 
     public bool isOnGround = false;
-    public float height = 0.7f;
+    public float offsetY = 0.7f;
+    public float offsetX = 0.7f;
     public float radius = 0.1f;
     public LayerMask groundLayer;
 
@@ -63,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     public void DoMove()
     {
         rb.velocity = new Vector2(move.x * speed, rb.velocity.y);
-       // anim.SetFloat("horizontalSpeed", Mathf.Abs(rb.velocity.x));
+        // anim.SetFloat("horizontalSpeed", Mathf.Abs(rb.velocity.x));
         /*if (rb.velocity.x < 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -81,13 +82,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y - height, transform.position.z), radius);
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x + offsetX, transform.position.y + offsetY, transform.position.z), radius);
     }
 
     private void CheckGround()
     {
-        isOnGround = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y - height), radius, groundLayer);
-       // anim.SetBool("isOnGround", isOnGround);
+        isOnGround = Physics2D.OverlapCircle(new Vector2(transform.position.x + offsetX, transform.position.y + offsetY), radius, groundLayer);
+        // anim.SetBool("isOnGround", isOnGround);
     }
 
     private void OnJump(InputValue value)
@@ -96,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumping && isOnGround)
         {
             rb.velocity = new Vector2(rb.velocity.x, jump);
-           // anim.ResetTrigger("jumping");
+            // anim.ResetTrigger("jumping");
             //anim.SetTrigger("jumping");
             //AudioManager.Instance.Play("Jump");
         }
@@ -116,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpMultiplier - 1) * Time.deltaTime;
         }
-       // anim.SetFloat("verticalSpeed", rb.velocity.y);
+        // anim.SetFloat("verticalSpeed", rb.velocity.y);
     }
 
     #endregion jumping
@@ -132,11 +133,11 @@ public class PlayerMovement : MonoBehaviour
             }
             frozen = true;
             transform.position = new Vector3(frozenX, frozenY, transform.position.z);
-           // anim.SetBool("freeze", true);
+            // anim.SetBool("freeze", true);
         }
         else
         {
-           // anim.SetBool("freeze", false);
+            // anim.SetBool("freeze", false);
             frozen = false;
         }
     }
