@@ -31,13 +31,15 @@ public class Piece : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             Tiles[i] = Instantiate(TilePrefab, transform);
-            Tiles[i].transform.localPosition = new Vector3(layout[i].x, layout[i].y, transform.position.z);
-            Tiles[i].GetComponent<TetriminoCell>().SetTetrimino(tetrimino);
-            if (i == 0)
-            {
-                Tiles[i].GetComponent<PlayerTile>().SetTetrimino(tetrimino);
-            }
+            Tiles[i].Collider.localPosition = new Vector3(layout[i].x, layout[i].y, transform.position.z);
+            Tiles[i].Display.transform.localPosition = new Vector3(layout[i].x, layout[i].y, transform.position.z);
+            Tiles[i].Display.GetComponent<TetriminoCell>().SetTetrimino(tetrimino);
         }
+
+        // Add face to pivot
+        Tiles[0].Display.Face.gameObject.SetActive(true);
+        Tiles[0].Display.Face.SetTetrimino(tetrimino);
+
         // Set ground checkers in parent
         transform.parent.GetComponent<PlayerMovement>()
             .SetCheckers(Tiles.SelectMany(tile => tile.GetComponent<PlayerTile>().groundCheckers).ToArray());
@@ -103,6 +105,10 @@ public class Piece : MonoBehaviour
                 if (grid.TestPlayer(pieceGridLocator.GlobalNextTilesPositions()))
                 {
                     return true;
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    Tiles[i].Offset(-offset);
                 }
             }
         }

@@ -7,10 +7,12 @@ public class Tile : MonoBehaviour
 {
     public Vector2 CurrentPosition;
     public Vector2 NextPosition;
+    public Transform Collider;
+    public PlayerBlockDisplay Display;
 
     public void Start()
     {
-        CurrentPosition = new Vector2(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
+        CurrentPosition = new Vector2(Mathf.RoundToInt(Collider.localPosition.x), Mathf.RoundToInt(Collider.localPosition.y));
         NextPosition = CurrentPosition;
     }
 
@@ -38,7 +40,8 @@ public class Tile : MonoBehaviour
 
     public void Apply()
     {
-        transform.DOLocalMove(NextPosition, 0.2f);
+        Collider.localPosition = NextPosition;
+        Display.MoveToPosition(NextPosition);
         CurrentPosition = NextPosition;
     }
 }

@@ -349,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 328761861832304902, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: -6.8
       objectReference: {fileID: 0}
     - target: {fileID: 328761861832304902, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -713,16 +713,13 @@ MonoBehaviour:
   CellPrefab: {fileID: -1117002021726310201, guid: 6a20968cab1f02d45aa6291a4deabccf, type: 3}
   TestBlocks:
   - {x: 0, y: 0}
-  - {x: 0, y: 1}
   - {x: 1, y: 0}
   - {x: 3, y: 0}
-  - {x: 4, y: 0}
-  - {x: 4, y: 1}
-  - {x: 4, y: 2}
+  - {x: 3, y: 1}
   - {x: 3, y: 2}
-  - {x: 5, y: 0}
-  - {x: 6, y: 0}
-  - {x: 7, y: 0}
-  - {x: 8, y: 0}
-  - {x: 8, y: 0}
-  - {x: 7, y: 7}
+  - {x: 3, y: 3}
+  - {x: 3, y: 4}
+  - {x: 2, y: 4}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  - {x: 1, y: 2}

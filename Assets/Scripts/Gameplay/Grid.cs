@@ -138,23 +138,23 @@ public class TetrisGrid
             }
         }
         var offset = 0;
-        while (offset < HEIGHT)
-        {
-            var hasCollided = false;
-            foreach (var point in points)
-            {
-                if (point.y - offset <= 0 || Cells[point.y - offset - 1, point.x].Present)
-                {
-                    hasCollided = true;
-                    break;
-                }
-            }
-            if (hasCollided)
-            {
-                break;
-            }
-            offset++;
-        }
+        //while (offset < HEIGHT)
+        //{
+        //    var hasCollided = false;
+        //    foreach (var point in points)
+        //    {
+        //        if (point.y - offset <= 0 || Cells[point.y - offset - 1, point.x].Present)
+        //        {
+        //            hasCollided = true;
+        //            break;
+        //        }
+        //    }
+        //    if (hasCollided)
+        //    {
+        //        break;
+        //    }
+        //    offset++;
+        //}
         foreach (var point in points)
         {
             if (isPreview && !Cells[point.y - offset, point.x].Present)
