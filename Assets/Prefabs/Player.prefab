@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06451e1bb2bd924db9ca4f89acca0ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tetrimino: 0
-  TilePrefab: {fileID: 0}
+  Tetrimino: 2
+  TilePrefab: {fileID: 1258581929, guid: 98ca6f7c5756ba94bba48f21ccf4ef52, type: 3}
 --- !u!1 &328761861832304907
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 8d7841586c5960b4098be4043ab5d151, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -153,11 +153,12 @@ MonoBehaviour:
   jumpMultiplier: 4
   isOnGround: 0
   offsetY: 0
-  offsetX: 0.5
+  offsetX: 0
   radius: 0.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  groundCheckers: []
   frozen: 0
   frozenX: 0
   frozenY: 0

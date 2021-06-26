@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public float offsetX = 0.7f;
     public float radius = 0.1f;
     public LayerMask groundLayer;
+    public Transform[] groundCheckers = new Transform[4];
 
     #endregion jump
 
@@ -81,14 +82,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(new Vector3(transform.position.x + offsetX, transform.position.y + offsetY, transform.position.z), radius);
+        foreach (var checker in groundCheckers)
+        {
+            Gizmos.color = TestGround(checker) ? Color.green : Color.yellow;
+            Gizmos.DrawWireSphere(new Vector3(checker.position.x + offsetX, checker.position.y + offsetY, checker.position.z), radius);
+        }
     }
 
     private void CheckGround()
     {
-        isOnGround = Physics2D.OverlapCircle(new Vector2(transform.position.x + offsetX, transform.position.y + offsetY), radius, groundLayer);
+        isOnGround =
+            groundCheckers.Any(TestGround);
         // anim.SetBool("isOnGround", isOnGround);
+    }
+
+    private bool TestGround(Transform checker)
+    {
+        return Physics2D.OverlapCircle(new Vector2(checker.position.x + offsetX, checker.position.y + offsetY), radius, groundLayer);
+    }
+
+    public void SetCheckers(Transform[] checkers)
+    {
+        groundCheckers = checkers;
     }
 
     private void OnJump(InputValue value)

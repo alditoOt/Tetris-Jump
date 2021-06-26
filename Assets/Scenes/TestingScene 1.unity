@@ -322,14 +322,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1975258537, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
-      propertyPath: TilePrefab
-      value: 
-      objectReference: {fileID: 1258581929, guid: 98ca6f7c5756ba94bba48f21ccf4ef52, type: 3}
-    - target: {fileID: 1975258537, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
-      propertyPath: Tetrimino
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 328761861832304902, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4

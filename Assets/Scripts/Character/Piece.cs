@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -26,6 +27,9 @@ public class Piece : MonoBehaviour
                 tiles[i].GetComponent<PlayerTile>().SetTetrimino(tetrimino);
             }
         }
+        // Set ground checkers in parent
+        transform.parent.GetComponent<PlayerMovement>()
+            .SetCheckers(tiles.SelectMany(tile => tile.GetComponent<PlayerTile>().groundCheckers).ToArray());
     }
 
     public void Rotate(bool rotationDirection)
