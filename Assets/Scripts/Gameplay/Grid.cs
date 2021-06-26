@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class Grid : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class Grid : MonoBehaviour
     private TetrisGrid TetrisGrid;
     private TetrisGrid PreviousTetrisGrid;
     private int Combo;
+    public int points = 0;
+    public int totalLines = 0;
+    public TextMeshProUGUI pointsText;
+    public TextMeshProUGUI linesAmount;
+    public TextMeshProUGUI tetrisFX;
 
     // Start is called before the first frame update
     private void Awake()
@@ -57,6 +63,31 @@ public class Grid : MonoBehaviour
         {
             Combo++;
             PreviousTetrisGrid = TetrisGrid.Copy();
+            switch(numberOfLines)
+            {
+                case 1:
+                    points += 40;
+                    totalLines += 1;
+                    break;
+                case 2:
+                    points += 100;
+                    totalLines += 2;
+                    break;
+                case 3:
+                    points += 300;
+                    totalLines += 3;
+                    break;
+                case 4:
+                    points += 1200;
+                    totalLines += 4;
+                    tetrisFX.gameObject.SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+            linesAmount.text = Convert.ToString(totalLines);
+            pointsText.text = Convert.ToString(points);
+            Debug.Log(points);
             // TO-DO: Handle points for different number of completed lines
             // 1: SIMPLE
             // 2: DOUBLE
