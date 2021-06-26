@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jump);
             anim.ResetTrigger("jumping");
             anim.SetTrigger("jumping");
-            AudioManager.Instance.Play("Jump");
+            //AudioManager.Instance.Play("Jump");
         }
     }
 
