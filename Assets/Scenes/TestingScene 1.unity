@@ -471,6 +471,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 328761861832304903, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
+      propertyPath: airSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 328761861832304903, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 328761861832304904, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
       propertyPath: m_NeverAutoSwitchControlSchemes
       value: 1

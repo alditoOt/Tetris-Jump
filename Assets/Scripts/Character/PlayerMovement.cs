@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 move;
     public float speed = 5f;
+    public float airSpeed = 5f;
     public float facingLeft = 1f;
 
     #endregion walk
@@ -64,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void DoMove()
     {
-        rb.velocity = new Vector2(move.x * speed, rb.velocity.y);
+        rb.velocity = new Vector2(move.x * (isOnGround ? speed : airSpeed), rb.velocity.y);
         // anim.SetFloat("horizontalSpeed", Mathf.Abs(rb.velocity.x));
         /*if (rb.velocity.x < 0)
         {
