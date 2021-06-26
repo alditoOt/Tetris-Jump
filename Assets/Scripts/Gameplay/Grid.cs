@@ -70,11 +70,27 @@ public class Grid : MonoBehaviour
             {
                 Cells[y, x].SetBlock(cell.Tetrimino);
             }
+            else if (cell.Preview)
+            {
+                Cells[y, x].SetPreview(cell.Tetrimino);
+            }
             else
             {
                 Cells[y, x].Clear();
             }
         }
+    }
+
+    public void LocatePlayer(List<Vector2Int> positions, Tetrimino tetrimino)
+    {
+        TetrisGrid.ClearPreviews();
+        TetrisGrid.SetPoints(positions, tetrimino, false, true);
+        RenderGrid();
+    }
+
+    public bool TestPlayer(List<Vector2Int> positions)
+    {
+        return TetrisGrid.CheckSpace(positions);
     }
 }
 
@@ -105,10 +121,60 @@ public class TetrisGrid
                 if (block.Item1 >= 0 && block.Item2 >= 0
                     && block.Item1 < WIDTH && block.Item2 < HEIGHT)
                 {
-                    Cells[block.Item2, block.Item1].Present = true;
+                    Cells[block.Item2, block.Item1].SetValue(null);
                 }
             }
         }
+    }
+
+    public void SetPoints(List<Vector2Int> points, Tetrimino tetrimino, bool isPresent = false, bool isPreview = false)
+    {
+        foreach (var point in points)
+        {
+            if (point.x < 0 || point.y < 0
+                || point.x >= WIDTH || point.y >= HEIGHT)
+            {
+                return;
+            }
+        }
+        var offset = 0;
+        while (offset < HEIGHT)
+        {
+            var hasCollided = false;
+            foreach (var point in points)
+            {
+                if (point.y - offset <= 0 || Cells[point.y - offset - 1, point.x].Present)
+                {
+                    hasCollided = true;
+                    break;
+                }
+            }
+            if (hasCollided)
+            {
+                break;
+            }
+            offset++;
+        }
+        foreach (var point in points)
+        {
+            if (isPreview && !Cells[point.y - offset, point.x].Present)
+            {
+                Cells[point.y - offset, point.x].SetPreview(tetrimino);
+            }
+            else if (isPresent)
+            {
+                Cells[point.y - offset, point.x].SetValue(tetrimino);
+            }
+        }
+    }
+
+    public bool CheckSpace(List<Vector2Int> points)
+    {
+        return points.All(point =>
+        {
+            return point.x >= 0 && point.y >= 0
+                && point.x < WIDTH && point.y < HEIGHT && !Cells[point.y, point.x].Present;
+        });
     }
 
     public TetrisCell GetCell(int x, int y)
@@ -176,16 +242,46 @@ public class TetrisGrid
             Cells = cellsCopy
         };
     }
+
+    public void ClearPreviews()
+    {
+        for (int i = 0; i < HEIGHT; i++)
+        {
+            for (int j = 0; j < WIDTH; j++)
+            {
+                if (Cells[i, j].Preview)
+                {
+                    Cells[i, j].Clear();
+                }
+            }
+        }
+    }
 }
 
 public class TetrisCell
 {
     public bool Present { get; set; }
+    public bool Preview { get; set; }
     public Tetrimino? Tetrimino { get; set; }
+
+    public void SetPreview(Tetrimino? tetrimino)
+    {
+        Present = false;
+        Preview = true;
+        Tetrimino = tetrimino;
+    }
+
+    public void SetValue(Tetrimino? tetrimino)
+    {
+        Present = true;
+        Preview = false;
+        Tetrimino = tetrimino;
+    }
 
     public void Clear()
     {
         Present = false;
+        Preview = false;
         Tetrimino = null;
     }
 
@@ -194,6 +290,7 @@ public class TetrisCell
         return new TetrisCell()
         {
             Present = Present,
+            Preview = Preview,
             Tetrimino = Tetrimino
         };
     }
@@ -208,7 +305,7 @@ public class TetrisCell
         else
         {
             TetrisCell p = (TetrisCell)obj;
-            return Present == p.Present && Tetrimino.Equals(p.Tetrimino);
+            return Present == p.Present && Preview == p.Preview && Tetrimino.Equals(p.Tetrimino);
         }
     }
 
@@ -217,6 +314,7 @@ public class TetrisCell
         int hashCode = 367770434;
         hashCode = hashCode * -1521134295 + Present.GetHashCode();
         hashCode = hashCode * -1521134295 + Tetrimino.GetHashCode();
+        hashCode = hashCode * -1521134295 + Preview.GetHashCode();
         return hashCode;
     }
 }

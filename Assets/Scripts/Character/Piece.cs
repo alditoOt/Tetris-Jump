@@ -6,11 +6,22 @@ public class Piece : MonoBehaviour
 {
     public Tetrimino Tetrimino;
     public Tile TilePrefab;
+    public Grid grid;
+
+    [HideInInspector]
+    public Tile[] Tiles = new Tile[4];
+
     private int rotationIndex = 0;
-    private Tile[] tiles = new Tile[4];
+    public PieceGridLocator pieceGridLocator;
 
     private void Start()
     {
+        pieceGridLocator = new PieceGridLocator()
+        {
+            grid = grid,
+            piece = this,
+            transform = transform
+        };
         InitializePiece(Tetrimino);
     }
 
@@ -19,17 +30,17 @@ public class Piece : MonoBehaviour
         var layout = TetriminoLogic.Layouts[tetrimino];
         for (int i = 0; i < 4; i++)
         {
-            tiles[i] = Instantiate(TilePrefab, transform);
-            tiles[i].transform.localPosition = new Vector3(layout[i].x, layout[i].y, transform.position.z);
-            tiles[i].GetComponent<TetriminoCell>().SetTetrimino(tetrimino);
+            Tiles[i] = Instantiate(TilePrefab, transform);
+            Tiles[i].transform.localPosition = new Vector3(layout[i].x, layout[i].y, transform.position.z);
+            Tiles[i].GetComponent<TetriminoCell>().SetTetrimino(tetrimino);
             if (i == 0)
             {
-                tiles[i].GetComponent<PlayerTile>().SetTetrimino(tetrimino);
+                Tiles[i].GetComponent<PlayerTile>().SetTetrimino(tetrimino);
             }
         }
         // Set ground checkers in parent
         transform.parent.GetComponent<PlayerMovement>()
-            .SetCheckers(tiles.SelectMany(tile => tile.GetComponent<PlayerTile>().groundCheckers).ToArray());
+            .SetCheckers(Tiles.SelectMany(tile => tile.GetComponent<PlayerTile>().groundCheckers).ToArray());
     }
 
     public void Rotate(bool rotationDirection)
@@ -45,20 +56,22 @@ public class Piece : MonoBehaviour
             // Counter Clockwise
             rotationIndex = (rotationIndex + 3) % 4;
         }
-        var originPosition = new Vector2Int(Mathf.RoundToInt(tiles[0].CurrentPosition.x), Mathf.RoundToInt(tiles[0].CurrentPosition.y));
+        var originPosition = new Vector2Int(Mathf.RoundToInt(Tiles[0].CurrentPosition.x), Mathf.RoundToInt(Tiles[0].CurrentPosition.y));
         for (int i = 1; i < 4; i++)
         {
-            tiles[i].Rotate(originPosition, rotationDirection);
+            Tiles[i].Rotate(originPosition, rotationDirection);
         }
         var success = Offset(oldRotationIndex, rotationIndex);
-        if (!success)
-        {
-            Rotate(!rotationDirection);
-            return;
-        }
         for (int i = 0; i < 4; i++)
         {
-            tiles[i].Apply();
+            if (success)
+            {
+                Tiles[i].Apply();
+            }
+            else
+            {
+                Tiles[i].Undo();
+            }
         }
     }
 
@@ -67,30 +80,33 @@ public class Piece : MonoBehaviour
         if (Tetrimino == Tetrimino.O)
         {
             var offset = TetriminoLogic.OPieceOffsetData[oldRotationIndex] - TetriminoLogic.OPieceOffsetData[newRotationIndex];
-            Debug.Log(offset);
             for (int i = 0; i < 4; i++)
             {
-                tiles[i].Offset(offset);
+                Tiles[i].Offset(offset);
             }
             return true;
         }
-        else if (Tetrimino == Tetrimino.I)
-        {
-            var offset = TetriminoLogic.IPieceOffsetData[oldRotationIndex, 0] - TetriminoLogic.IPieceOffsetData[newRotationIndex, 0];
-            for (int i = 0; i < 4; i++)
-            {
-                tiles[i].Offset(offset);
-            }
-        }
         else
         {
-            var offset = TetriminoLogic.DefaultOffsetData[oldRotationIndex, 0] - TetriminoLogic.DefaultOffsetData[newRotationIndex, 0];
-            for (int i = 0; i < 4; i++)
+            var offsetData = TetriminoLogic.DefaultOffsetData;
+            if (Tetrimino == Tetrimino.I)
             {
-                tiles[i].Offset(offset);
+                offsetData = TetriminoLogic.IPieceOffsetData;
+            }
+            for (int c = 0; c < 5; c++)
+            {
+                var offset = offsetData[oldRotationIndex, c] - offsetData[newRotationIndex, c];
+                for (int i = 0; i < 4; i++)
+                {
+                    Tiles[i].Offset(offset);
+                }
+                if (grid.TestPlayer(pieceGridLocator.GlobalNextTilesPositions()))
+                {
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
 }
 

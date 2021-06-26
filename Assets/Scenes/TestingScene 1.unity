@@ -197,6 +197,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &440837847 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 328761860573544173, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
+  m_PrefabInstance: {fileID: 622879262}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &440837850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440837847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7c9ea724c1a6944bf4b8832ea2e8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +339,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1975258537, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 5737707145519696014}
+    - target: {fileID: 1975258537, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
+      propertyPath: Tetrimino
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 328761861832304902, guid: e60081f0af27d8f4f9b07ae6fb54811c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -687,14 +712,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: -1117002021726310201, guid: 6a20968cab1f02d45aa6291a4deabccf, type: 3}
   TestBlocks:
-  - {x: 1, y: 1}
-  - {x: 2, y: 2}
-  - {x: 2, y: 3}
   - {x: 0, y: 0}
+  - {x: 0, y: 1}
   - {x: 1, y: 0}
-  - {x: 2, y: 0}
   - {x: 3, y: 0}
   - {x: 4, y: 0}
+  - {x: 4, y: 1}
+  - {x: 4, y: 2}
+  - {x: 3, y: 2}
   - {x: 5, y: 0}
   - {x: 6, y: 0}
   - {x: 7, y: 0}

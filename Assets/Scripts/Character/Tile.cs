@@ -6,12 +6,12 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public Vector2 CurrentPosition;
-    private Vector2 nextPosition;
+    public Vector2 NextPosition;
 
     public void Start()
     {
         CurrentPosition = new Vector2(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
-        nextPosition = CurrentPosition;
+        NextPosition = CurrentPosition;
     }
 
     public void Rotate(Vector2Int originPosition, bool rotationDirection)
@@ -23,17 +23,22 @@ public class Tile : MonoBehaviour
         Vector2Int yRotation = rotationDirection ? new Vector2Int(-1, 0) : new Vector2Int(1, 0);
 
         var newRelativePosition = new Vector2(Vector2.Dot(xRotation, relativePosition), Vector2.Dot(yRotation, relativePosition));
-        nextPosition = newRelativePosition + originPosition;
+        NextPosition = newRelativePosition + originPosition;
     }
 
     public void Offset(Vector2Int offset)
     {
-        nextPosition += offset;
+        NextPosition += offset;
+    }
+
+    public void Undo()
+    {
+        NextPosition = CurrentPosition;
     }
 
     public void Apply()
     {
-        transform.DOLocalMove(nextPosition, 0.2f);
-        CurrentPosition = nextPosition;
+        transform.DOLocalMove(NextPosition, 0.2f);
+        CurrentPosition = NextPosition;
     }
 }
