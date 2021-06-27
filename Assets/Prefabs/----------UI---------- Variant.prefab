@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1278486490, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4931326732085673809, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -107,5 +107,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: ----------UI---------- Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4931326732085673822, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931326732085673822, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931326733415592317, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: screen
+      value: 
+      objectReference: {fileID: 8977997920206735528}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+--- !u!1 &8977997920206735528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8432509577247278745, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+  m_PrefabInstance: {fileID: 693003770773704241}
+  m_PrefabAsset: {fileID: 0}

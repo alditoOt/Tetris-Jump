@@ -8,7 +8,6 @@ public class PlayerPiece : MonoBehaviour
     public PlayerGrid Grid;
     public float cooldown = 10f;
     public float cooldownModifier = 0.7f;
-    private bool cooldownModified = false;
 
     private Coroutine spawningRoutine;
 
@@ -36,7 +35,7 @@ public class PlayerPiece : MonoBehaviour
 
     private IEnumerator SpawnedPiece()
     {
-        float currentCooldown = Mathf.Max(cooldown - Piece.Grid.totalLines / 10 * 0.7f, 3f);
+        float currentCooldown = Mathf.Max(cooldown - Piece.Grid.totalLines / 10 * cooldownModifier, 3f);
         Grid.RespawnPiece(this, currentCooldown);
         yield return new WaitForSeconds(currentCooldown);
         OnPlace();

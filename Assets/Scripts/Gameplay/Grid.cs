@@ -8,6 +8,7 @@ public class Grid : MonoBehaviour
 {
     public Cell CellPrefab;
     public List<Vector2> TestBlocks = new List<Vector2>();
+    public PlayerGrid pg;
 
     private Cell[,] Cells;
     private List<Tuple<int, int>> Blocks;
@@ -23,6 +24,7 @@ public class Grid : MonoBehaviour
     public TextMeshProUGUI doubleLine;
     public TextMeshProUGUI triple;
     public TextMeshProUGUI comboText;
+    public TextMeshProUGUI finalScore;
 
     // Start is called before the first frame update
     private void Awake()
@@ -50,6 +52,13 @@ public class Grid : MonoBehaviour
         RenderGrid();
     }
 
+    private void FixedUpdate()
+    {
+        if(pg.gameLost)
+        {
+            finalScore.text = Convert.ToString(points);
+        }
+    }
     public void CheckForLines()
     {
         List<int> completeLinesIndexes = TetrisGrid.CheckForLines();
@@ -95,12 +104,6 @@ public class Grid : MonoBehaviour
             linesAmount.text = Convert.ToString(totalLines);
             pointsText.text = Convert.ToString(points);
             Debug.Log(points);
-            // TO-DO: Handle points for different number of completed lines
-            // 1: SIMPLE
-            // 2: DOUBLE
-            // 3: TRIPLE
-            // 4: TETRIS OMG
-            // Using the Combo variable could be great too
             TetrisGrid.DestroyLines(indexes);
             RenderGrid();
             PreviousTetrisGrid = null;
