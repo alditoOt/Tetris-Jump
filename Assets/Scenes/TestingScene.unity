@@ -1033,17 +1033,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1413117285 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1413117285, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-  m_PrefabInstance: {fileID: 4931326733415592313}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1484777339
 GameObject:
   m_ObjectHideFlags: 3
@@ -1472,18 +1461,6 @@ PrefabInstance:
       propertyPath: screenTransition
       value: 
       objectReference: {fileID: 1126434759}
-    - target: {fileID: 3869055915430377099, guid: fe8a4c50112053e4cbeaa544a537d936, type: 3}
-      propertyPath: maxScoreText
-      value: 
-      objectReference: {fileID: 1413117285}
-    - target: {fileID: 3869055915430377099, guid: fe8a4c50112053e4cbeaa544a537d936, type: 3}
-      propertyPath: grid
-      value: 
-      objectReference: {fileID: 813067785}
-    - target: {fileID: 3869055915430377099, guid: fe8a4c50112053e4cbeaa544a537d936, type: 3}
-      propertyPath: playerGrid
-      value: 
-      objectReference: {fileID: 813067784}
     - target: {fileID: 3869055915430377100, guid: fe8a4c50112053e4cbeaa544a537d936, type: 3}
       propertyPath: m_LocalPosition.x
       value: 932.7861

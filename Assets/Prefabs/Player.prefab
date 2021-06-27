@@ -162,9 +162,9 @@ MonoBehaviour:
   speed: 2
   airSpeed: 7
   facingLeft: 1
-  jump: 17
+  jump: 15
   jumping: 0
-  fallMultiplier: 5
+  fallMultiplier: 3
   lowJumpMultiplier: 7
   jumpMultiplier: 4
   isOnGround: 0

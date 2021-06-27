@@ -17,7 +17,6 @@ public class Grid : MonoBehaviour
     private int Combo = 0;
     public int points = 0;
     public int totalLines = 0;
-    public int maxScore = 0;
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI linesAmount;
     public TextMeshProUGUI tetrisFX;
@@ -25,7 +24,6 @@ public class Grid : MonoBehaviour
     public TextMeshProUGUI doubleLine;
     public TextMeshProUGUI triple;
     public TextMeshProUGUI comboText;
-    public TextMeshProUGUI maxScoreText;
 
     // Start is called before the first frame update
     private void Awake()
@@ -52,6 +50,7 @@ public class Grid : MonoBehaviour
     {
         RenderGrid();
         GameManager.Instance.GameLost.AddListener(OnGameLost);
+        GameManager.Instance.SetPoints(points);
     }
 
     private void OnGameLost()

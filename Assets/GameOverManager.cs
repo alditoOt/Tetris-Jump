@@ -7,6 +7,7 @@ public class GameOverManager : MonoBehaviour
 {
     public GameObject endScreen;
     public TextMeshProUGUI finalScore;
+    public TextMeshProUGUI HighScore;
 
     private void Start()
     {
@@ -29,5 +30,7 @@ public class GameOverManager : MonoBehaviour
         Debug.Log("GameOver");
         endScreen.SetActive(true);
         finalScore.text = GameManager.Instance.GetPoints().ToString();
+        GameManager.Instance.SetMaxPoints(GameManager.Instance.GetPoints());
+        HighScore.text = GameManager.Instance.GetMaxPoints().ToString();
     }
 }

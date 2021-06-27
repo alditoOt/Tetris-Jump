@@ -46,7 +46,23 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         gameLost = true;
         GameLost.Invoke();
     }
+    public void SetMaxPoints(int points)
+    {
+        if(PlayerPrefs.GetInt("HighScore") < points)
+        {
+            PlayerPrefs.SetInt("HighScore", points);
+        }
+    }
 
+    public int GetMaxPoints()
+    {
+        return PlayerPrefs.GetInt("HighScore");
+    }
+
+    public void ResetHighScore()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+    }
     public void SetPoints(int points)
     {
         this.points = points;

@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenTransition: {fileID: 0}
+  gameLost: 0
+  GameLost:
+    m_PersistentCalls:
+      m_Calls: []
