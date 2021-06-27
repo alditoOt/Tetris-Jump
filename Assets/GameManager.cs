@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
     public GameObject screenTransition;
-    public GameObject endScreen;
     public bool gameLost = false;
 
     public UnityEvent GameLost;
@@ -37,7 +36,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void EndGame()
     {
-        endScreen.SetActive(true);
         gameLost = true;
         GameLost.Invoke();
     }
