@@ -1033,15 +1033,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1256371668 stripped
+--- !u!114 &1413117285 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3869055915430377099, guid: fe8a4c50112053e4cbeaa544a537d936, type: 3}
-  m_PrefabInstance: {fileID: 3869055916342723423}
+  m_CorrespondingSourceObject: {fileID: 1413117285, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+  m_PrefabInstance: {fileID: 4931326733415592313}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ea4e2a8a5287334bbb9a3ccb98cf70e, type: 3}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1484777339
@@ -1472,6 +1472,18 @@ PrefabInstance:
       propertyPath: screenTransition
       value: 
       objectReference: {fileID: 1126434759}
+    - target: {fileID: 3869055915430377099, guid: fe8a4c50112053e4cbeaa544a537d936, type: 3}
+      propertyPath: maxScoreText
+      value: 
+      objectReference: {fileID: 1413117285}
+    - target: {fileID: 3869055915430377099, guid: fe8a4c50112053e4cbeaa544a537d936, type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 813067785}
+    - target: {fileID: 3869055915430377099, guid: fe8a4c50112053e4cbeaa544a537d936, type: 3}
+      propertyPath: playerGrid
+      value: 
+      objectReference: {fileID: 813067784}
     - target: {fileID: 3869055915430377100, guid: fe8a4c50112053e4cbeaa544a537d936, type: 3}
       propertyPath: m_LocalPosition.x
       value: 932.7861
@@ -1529,54 +1541,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1292199265, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1292199265, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_fontSize
-      value: 39.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1761435267, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1761435268, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1761435268, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -449.79468
-      objectReference: {fileID: 0}
-    - target: {fileID: 1761435268, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -110.000015
-      objectReference: {fileID: 0}
-    - target: {fileID: 1761435268, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -249.9754
-      objectReference: {fileID: 0}
-    - target: {fileID: 1761435269, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1256371668}
-    - target: {fileID: 1761435269, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1761435269, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_SpriteState.m_HighlightedSprite
-      value: 
-      objectReference: {fileID: -2230229002620744338, guid: fedb149dccbffe843827b67211addd37, type: 3}
-    - target: {fileID: 1761435270, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -4245881668751691442, guid: fedb149dccbffe843827b67211addd37, type: 3}
-    - target: {fileID: 1761435270, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4931326732085673809, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

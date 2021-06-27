@@ -15,8 +15,9 @@ public class Grid : MonoBehaviour
     private TetrisGrid TetrisGrid;
     private TetrisGrid PreviousTetrisGrid;
     private int Combo = 0;
-    private int points = 0;
+    public int points = 0;
     public int totalLines = 0;
+    public int maxScore = 0;
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI linesAmount;
     public TextMeshProUGUI tetrisFX;
@@ -24,7 +25,7 @@ public class Grid : MonoBehaviour
     public TextMeshProUGUI doubleLine;
     public TextMeshProUGUI triple;
     public TextMeshProUGUI comboText;
-    public TextMeshProUGUI finalScore;
+    public TextMeshProUGUI maxScoreText;
 
     // Start is called before the first frame update
     private void Awake()
@@ -55,7 +56,13 @@ public class Grid : MonoBehaviour
 
     private void OnGameLost()
     {
-        finalScore.text = Convert.ToString(points);
+        /*maxScore = PlayerPrefs.GetInt("HighSchore", 0);
+        if (maxScore < points)
+        {
+            maxScore = points;
+            PlayerPrefs.SetInt("HighSchore", maxScore);
+            maxScoreText.text = PlayerPrefs.GetInt("HighScore").ToString();
+        }*/
     }
 
     public void CheckForLines()
@@ -104,6 +111,7 @@ public class Grid : MonoBehaviour
                 default:
                     break;
             }
+            GameManager.Instance.SetPoints(points);
             linesAmount.text = Convert.ToString(totalLines);
             pointsText.text = Convert.ToString(points);
             Debug.Log(points);

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
     public GameObject screenTransition;
     public bool gameLost = false;
+    private int points;
 
     public UnityEvent GameLost;
 
@@ -37,11 +39,21 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
-}
+
 
     public void EndGame()
     {
         gameLost = true;
         GameLost.Invoke();
+    }
+
+    public void SetPoints(int points)
+    {
+        this.points = points;
+    }
+
+    public int GetPoints()
+    {
+        return points;
     }
 }
