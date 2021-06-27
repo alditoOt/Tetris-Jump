@@ -10,7 +10,6 @@ public class PlayerLifespan : MonoBehaviour
     public float cooldownStep = 0.7f;
     public float minCooldown = 3f;
     public int linesPerLevel = 10;
-
     [Header("UI")]
     public Image cooldownUI;
 
@@ -19,6 +18,13 @@ public class PlayerLifespan : MonoBehaviour
 
     private Coroutine lifespanCoroutine;
 
+    private bool available;
+    private void Start()
+    {
+        available = true;
+
+        GameManager.Instance.GameLost.AddListener(() => available = false);
+    }
     public void StartPieceLifespan(PlayerPiece player, PlayerStats stats)
     {
         if (lifespanCoroutine != null)
@@ -37,6 +43,9 @@ public class PlayerLifespan : MonoBehaviour
         cooldownUI.DOColor(emptyColor, currentCooldown).SetEase(Ease.Linear);
         cooldownUI.DOFillAmount(0f, currentCooldown).SetEase(Ease.Linear);
         yield return new WaitForSeconds(currentCooldown);
-        player.OnPlace();
+        if(available)
+        {
+            player.OnPlace();
+        }
     }
 }

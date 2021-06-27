@@ -11,6 +11,7 @@ public class CreateParticle : MonoBehaviour
     private void Start()
     {
         grid.LinesDeleted.AddListener(CreateParticles);
+        grid.LinesChecked.AddListener(ShakeCamera);
     }
 
     void CreateParticles(List<int> lines)
@@ -20,5 +21,9 @@ public class CreateParticle : MonoBehaviour
             lineParticle[i].transform.position = new Vector2(grid.transform.position.x, grid.transform.position.y + lines[i]);
             lineParticle[i].Play();
         }
+    }
+    void ShakeCamera(int lines)
+    {
+        CameraManager.Instance.Shake(lines/4f, 0.3f);
     }
 }
