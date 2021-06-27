@@ -14,12 +14,14 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         StartScreen.SetActive(true);
+        AudioManager.Instance.Play("Tetris - Button");
         //GameManager.Instance.StartGame();
     }
 
     public void ResetScore()
     {
         GameManager.Instance.ResetHighScore();
+        AudioManager.Instance.Play("Tetris - Button");
         highScore.text = 0.ToString();
     }
 

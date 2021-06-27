@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     private void Start()
     {
+        AudioManager.Instance.Play("TetrisMusic");
         if (GameLost == null)
         {
             GameLost = new UnityEvent();

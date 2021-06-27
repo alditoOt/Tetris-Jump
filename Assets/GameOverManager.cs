@@ -17,11 +17,13 @@ public class GameOverManager : MonoBehaviour
     public void Restart()
     {
         GameManager.Instance.RestartScene();
+        AudioManager.Instance.Play("Tetris - Button");
     }
 
     public void BackToMenu()
     {
         GameManager.Instance.RestartGame();
+        AudioManager.Instance.Play("Tetris - Button");
     }
 
   

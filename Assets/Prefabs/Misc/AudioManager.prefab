@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &626228406123094614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 626228406123094612}
+  - component: {fileID: 626228406123094615}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &626228406123094612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626228406123094614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 529.7248, y: 430.78043, z: -588.22546}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &626228406123094615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626228406123094614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1790d45e052618f429174132db9db973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Tetris - Button
+    clip: {fileID: 8300000, guid: 32b8653b3278a714c8939990a47d3c09, type: 3}
+    volume: 3
+    pitch: 1
+    pitchMinRange: 1
+    pitchMaxRange: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LineClear
+    clip: {fileID: 8300000, guid: 559ebb7a3cc427b44832af374b0ef32d, type: 3}
+    volume: 1
+    pitch: 1
+    pitchMinRange: 1
+    pitchMaxRange: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TetrisMusic
+    clip: {fileID: 8300000, guid: 656d4c87647f6a744998b0ecf0dcef79, type: 3}
+    volume: 1
+    pitch: 1
+    pitchMinRange: 1
+    pitchMaxRange: 1
+    loop: 1
+    source: {fileID: 0}
+  lowVolume: 0.1

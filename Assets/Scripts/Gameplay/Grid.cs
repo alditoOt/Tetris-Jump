@@ -89,24 +89,28 @@ public class Grid : MonoBehaviour
                     points += 40 + 50 * (Combo - 1);
                     totalLines += 1;
                     single.gameObject.SetActive(true);
+                    AudioManager.Instance.Play("LineClear");
                     break;
 
                 case 2:
                     points += 100 + 50 * (Combo - 1);
                     totalLines += 2;
                     doubleLine.gameObject.SetActive(true);
+                    AudioManager.Instance.Play("LineClear");
                     break;
 
                 case 3:
                     points += 300 + 50 * (Combo - 1);
                     totalLines += 3;
                     triple.gameObject.SetActive(true);
+                    AudioManager.Instance.Play("LineClear");
                     break;
 
                 case 4:
                     points += 1200 + 50 * (Combo - 1);
                     totalLines += 4;
                     tetrisFX.gameObject.SetActive(true);
+                    AudioManager.Instance.Play("Tetris - Button");
                     break;
 
                 default:
