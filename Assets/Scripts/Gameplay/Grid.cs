@@ -13,15 +13,16 @@ public class Grid : MonoBehaviour
     private List<Tuple<int, int>> Blocks;
     private TetrisGrid TetrisGrid;
     private TetrisGrid PreviousTetrisGrid;
-    private int Combo;
-    public int points = 0;
-    public int totalLines = 0;
+    private int Combo = 0;
+    private int points = 0;
+    private int totalLines = 0;
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI linesAmount;
     public TextMeshProUGUI tetrisFX;
     public TextMeshProUGUI single;
     public TextMeshProUGUI doubleLine;
     public TextMeshProUGUI triple;
+    public TextMeshProUGUI comboText;
 
     // Start is called before the first frame update
     private void Awake()
@@ -66,25 +67,25 @@ public class Grid : MonoBehaviour
         {
             Combo++;
             PreviousTetrisGrid = TetrisGrid.Copy();
-            switch(numberOfLines)
+            switch (numberOfLines)
             {
                 case 1:
-                    points += 40;
+                    points += 40*Combo;
                     totalLines += 1;
                     single.gameObject.SetActive(true);
                     break;
                 case 2:
-                    points += 100;
+                    points += 100*Combo;
                     totalLines += 2;
                     doubleLine.gameObject.SetActive(true);
                     break;
                 case 3:
-                    points += 300;
+                    points += 300*Combo;
                     totalLines += 3;
                     triple.gameObject.SetActive(true);
                     break;
                 case 4:
-                    points += 1200;
+                    points += 1200*Combo;
                     totalLines += 4;
                     tetrisFX.gameObject.SetActive(true);
                     break;
@@ -104,6 +105,7 @@ public class Grid : MonoBehaviour
             RenderGrid();
             PreviousTetrisGrid = null;
         }
+        comboText.text = Convert.ToString(Combo);
     }
 
     private void RenderGrid()
