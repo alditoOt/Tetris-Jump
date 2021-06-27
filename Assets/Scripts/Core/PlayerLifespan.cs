@@ -19,18 +19,18 @@ public class PlayerLifespan : MonoBehaviour
 
     private Coroutine lifespanCoroutine;
 
-    public void StartPieceLifespan(PlayerPiece player, Grid grid)
+    public void StartPieceLifespan(PlayerPiece player, PlayerStats stats)
     {
         if (lifespanCoroutine != null)
         {
             StopCoroutine(lifespanCoroutine);
         }
-        lifespanCoroutine = StartCoroutine(PieceLifespanCoroutine(player, grid));
+        lifespanCoroutine = StartCoroutine(PieceLifespanCoroutine(player, stats));
     }
 
-    private IEnumerator PieceLifespanCoroutine(PlayerPiece player, Grid grid)
+    private IEnumerator PieceLifespanCoroutine(PlayerPiece player, PlayerStats stats)
     {
-        float currentCooldown = Mathf.Max(initialCooldown - grid.totalLines / linesPerLevel * cooldownStep, minCooldown);
+        float currentCooldown = Mathf.Max(initialCooldown - stats.Lines / linesPerLevel * cooldownStep, minCooldown);
         cooldownUI.DOKill();
         cooldownUI.fillAmount = 1;
         cooldownUI.color = initialColor;

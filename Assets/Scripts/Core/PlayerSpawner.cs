@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerSpawner : MonoBehaviour
 {
     public PlayerPiece Player;
-    public Grid Grid;
+    public Transform StartPoint;
 
+    private Grid Grid;
     private PlayerLifespan Lifespan;
     private PlayerNextPieces NextPieces;
+    private PlayerStats Stats;
     private PiecesGenerator Generator;
 
     private void Awake()
@@ -20,7 +22,8 @@ public class PlayerSpawner : MonoBehaviour
     {
         Lifespan = GetComponent<PlayerLifespan>();
         NextPieces = GetComponent<PlayerNextPieces>();
-        Player.Grid = Grid;
+        Stats = GetComponent<PlayerStats>();
+        Grid = GetComponentInChildren<Grid>();
         Player.PiecePlaced.AddListener(SpawnPlayer);
         SpawnPlayer();
     }
@@ -30,7 +33,7 @@ public class PlayerSpawner : MonoBehaviour
         var nextPiece = Generator.PopNextPiece();
         NextPieces.SetNextPieces(Generator.GetNextPieces(4));
         // Move the piece to starting position
-        Player.transform.position = Grid.StartPoint.position;
+        Player.transform.position = StartPoint.position;
         Player.Piece.InitializePiece(nextPiece);
         MoveToLowestPoint();
 
@@ -40,10 +43,10 @@ public class PlayerSpawner : MonoBehaviour
             GameManager.Instance.EndGame();
         }
 
-        Lifespan.StartPieceLifespan(Player, Grid);
+        Lifespan.StartPieceLifespan(Player, Stats);
 
         nextPiece = Generator.GetNextPieces(1)[0];
-        Grid.SetNextPreview(nextPiece);
+        Grid.SetNextPreview(nextPiece, StartPoint);
     }
 
     private void MoveToLowestPoint()

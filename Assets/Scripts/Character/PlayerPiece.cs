@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerPiece : MonoBehaviour
 {
-    [HideInInspector]
     public Grid Grid;
 
     [HideInInspector]

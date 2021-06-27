@@ -23,12 +23,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355279009}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 22, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5737707144590109358}
-  m_RootOrder: 0
+  m_Father: {fileID: 5737707145816062674}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1222102582
 GameObject:
@@ -170,8 +170,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 355279010}
+  m_Children: []
   m_Father: {fileID: 5737707145816062674}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -240,16 +239,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: -1117002021726310201, guid: 6a20968cab1f02d45aa6291a4deabccf, type: 3}
   TestBlocks: []
-  StartPoint: {fileID: 355279010}
-  points: 0
-  totalLines: 0
-  pointsText: {fileID: 0}
-  linesAmount: {fileID: 0}
-  tetrisFX: {fileID: 0}
-  single: {fileID: 0}
-  doubleLine: {fileID: 0}
-  triple: {fileID: 0}
-  comboText: {fileID: 0}
+  LinesDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1336450500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +288,7 @@ Transform:
   m_Children:
   - {fileID: 5737707144590109358}
   - {fileID: 1222102583}
+  - {fileID: 355279010}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -395,4 +388,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  Grid: {fileID: 5737707145519696014}
+  StartPoint: {fileID: 0}

@@ -36,20 +36,21 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
-
 
     public void EndGame()
     {
         gameLost = true;
         GameLost.Invoke();
     }
+
     public void SetMaxPoints(int points)
     {
-        if(PlayerPrefs.GetInt("HighScore") < points)
+        if (PlayerPrefs.GetInt("HighScore") < points)
         {
             PlayerPrefs.SetInt("HighScore", points);
         }
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         PlayerPrefs.DeleteKey("HighScore");
     }
+
     public void SetPoints(int points)
     {
         this.points = points;

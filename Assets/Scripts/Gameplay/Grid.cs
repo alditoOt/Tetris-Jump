@@ -3,26 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Grid : MonoBehaviour
 {
     public Cell CellPrefab;
     public List<Vector2> TestBlocks = new List<Vector2>();
-    public Transform StartPoint;
 
     private Cell[,] Cells;
     private List<Tuple<int, int>> Blocks;
     private TetrisGrid TetrisGrid;
-    private int Combo = 0;
-    public int points = 0;
-    public int totalLines = 0;
-    public TextMeshProUGUI pointsText;
-    public TextMeshProUGUI linesAmount;
-    public TextMeshProUGUI tetrisFX;
-    public TextMeshProUGUI single;
-    public TextMeshProUGUI doubleLine;
-    public TextMeshProUGUI triple;
-    public TextMeshProUGUI comboText;
+
+    public UnityEvent<int> LinesDestroyed;
 
     // Start is called before the first frame update
     private void Awake()
@@ -42,14 +34,16 @@ public class Grid : MonoBehaviour
                 }
             }
         }
-        Combo = 0;
     }
 
     private void Start()
     {
+        if (LinesDestroyed == null)
+        {
+            LinesDestroyed = new UnityEvent<int>();
+        }
         RenderGrid();
         GameManager.Instance.GameLost.AddListener(OnGameLost);
-        GameManager.Instance.SetPoints(points);
     }
 
     private void OnGameLost()
@@ -59,66 +53,9 @@ public class Grid : MonoBehaviour
     public void CheckForLines(List<Vector2Int> modifiedBlocks)
     {
         List<int> completeLinesIndexes = TetrisGrid.CheckForLines(modifiedBlocks);
-        DestroyLines(completeLinesIndexes);
-    }
 
-    private void DestroyLines(List<int> indexes)
-    {
-        int numberOfLines = indexes.Count;
-        if (numberOfLines == 0)
-        {
-            Combo = 0;
-        }
-        else
-        {
-            Combo++;
-            switch (numberOfLines)
-            {
-                case 1:
-                    points += 40 + 50 * (Combo - 1);
-                    totalLines += 1;
-                    single.gameObject.SetActive(true);
-                    AudioManager.Instance.Play("LineClear");
-                    break;
-
-                case 2:
-                    points += 100 + 50 * (Combo - 1);
-                    totalLines += 2;
-                    doubleLine.gameObject.SetActive(true);
-                    AudioManager.Instance.Play("LineClear");
-                    break;
-
-                case 3:
-                    points += 300 + 50 * (Combo - 1);
-                    totalLines += 3;
-                    triple.gameObject.SetActive(true);
-                    AudioManager.Instance.Play("LineClear");
-                    break;
-
-                case 4:
-                    points += 1200 + 50 * (Combo - 1);
-                    totalLines += 4;
-                    tetrisFX.gameObject.SetActive(true);
-                    AudioManager.Instance.Play("Tetris - Button");
-                    break;
-
-                default:
-                    break;
-            }
-            GameManager.Instance.SetPoints(points);
-            linesAmount.text = Convert.ToString(totalLines);
-            pointsText.text = Convert.ToString(points);
-            Debug.Log(points);
-            TetrisGrid.DestroyLines(indexes);
-        }
-        if (Combo < 1)
-        {
-            comboText.text = Convert.ToString(0);
-        }
-        else
-        {
-            comboText.text = Convert.ToString(Combo - 1);
-        }
+        TetrisGrid.DestroyLines(completeLinesIndexes);
+        LinesDestroyed.Invoke(completeLinesIndexes.Count);
     }
 
     private void RenderGrid()
@@ -148,9 +85,9 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void SetNextPreview(Tetrimino nextPiece)
+    public void SetNextPreview(Tetrimino nextPiece, Transform startPoint)
     {
-        var startPosition = GridLocator.GetGridPosition(StartPoint, transform);
+        var startPosition = GridLocator.GetGridPosition(startPoint, transform);
         var nextPreview = new List<Vector2Int>();
         var layout = TetriminoLogic.Layouts[nextPiece];
         foreach (var tile in layout)
