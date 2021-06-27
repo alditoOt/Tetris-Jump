@@ -56,6 +56,12 @@ TextureImporter:
   - first:
       213: -8659074869437512169
     second: screen change divided_17
+  - first:
+      213: -4914704346965918435
+    second: screen change divided_0
+  - first:
+      213: 3860473061945571451
+    second: screen change divided_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -155,55 +161,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: screen change divided_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 576
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41d80c580575cd350800000000000000
-      internalID: 6042800803377351956
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: screen change divided_1
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 576
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1126dcd70e543cb50800000000000000
-      internalID: 6612205508395622929
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: screen change divided_2
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 480
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,10 +185,10 @@ TextureImporter:
       name: screen change divided_3
       rect:
         serializedVersion: 2
-        x: 1728
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 448
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,10 +206,10 @@ TextureImporter:
       name: screen change divided_4
       rect:
         serializedVersion: 2
-        x: 2304
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 416
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,10 +227,10 @@ TextureImporter:
       name: screen change divided_5
       rect:
         serializedVersion: 2
-        x: 2880
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 384
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,10 +248,10 @@ TextureImporter:
       name: screen change divided_6
       rect:
         serializedVersion: 2
-        x: 3456
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 352
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,10 +269,10 @@ TextureImporter:
       name: screen change divided_7
       rect:
         serializedVersion: 2
-        x: 4032
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 320
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,10 +290,10 @@ TextureImporter:
       name: screen change divided_8
       rect:
         serializedVersion: 2
-        x: 4608
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 288
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,10 +311,10 @@ TextureImporter:
       name: screen change divided_9
       rect:
         serializedVersion: 2
-        x: 5184
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 256
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,10 +332,10 @@ TextureImporter:
       name: screen change divided_10
       rect:
         serializedVersion: 2
-        x: 5760
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 224
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,10 +353,10 @@ TextureImporter:
       name: screen change divided_11
       rect:
         serializedVersion: 2
-        x: 6336
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 192
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -410,10 +374,10 @@ TextureImporter:
       name: screen change divided_12
       rect:
         serializedVersion: 2
-        x: 6912
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 160
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,10 +395,10 @@ TextureImporter:
       name: screen change divided_13
       rect:
         serializedVersion: 2
-        x: 7488
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 128
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,10 +416,10 @@ TextureImporter:
       name: screen change divided_14
       rect:
         serializedVersion: 2
-        x: 8064
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 96
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,10 +437,10 @@ TextureImporter:
       name: screen change divided_15
       rect:
         serializedVersion: 2
-        x: 8640
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 64
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -494,10 +458,10 @@ TextureImporter:
       name: screen change divided_16
       rect:
         serializedVersion: 2
-        x: 9216
-        y: 0
-        width: 576
-        height: 16
+        x: 0
+        y: 32
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -515,10 +479,10 @@ TextureImporter:
       name: screen change divided_17
       rect:
         serializedVersion: 2
-        x: 9792
+        x: 0
         y: 0
-        width: 576
-        height: 16
+        width: 1152
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -528,6 +492,48 @@ TextureImporter:
       bones: []
       spriteID: 7164aa3b849c4d780800000000000000
       internalID: -8659074869437512169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: screen change divided_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 544
+        width: 1152
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1d37078f667bcbb0800000000000000
+      internalID: -4914704346965918435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: screen change divided_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 1152
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b78fa32dbc7239530800000000000000
+      internalID: 3860473061945571451
       vertices: []
       indices: 
       edges: []
