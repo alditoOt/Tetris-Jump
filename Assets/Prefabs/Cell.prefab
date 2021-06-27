@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Block: {fileID: 5692891034855162029}
   Preview: {fileID: 1939914683206322291}
+  Visible: 1
 --- !u!212 &5476065319188202369
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -116,7 +117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6223015050042671878, guid: 8c04bf6f967a2bf44bfa604cfb94b7f8, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8585421395757889988, guid: 8c04bf6f967a2bf44bfa604cfb94b7f8, type: 3}
       propertyPath: m_LocalPosition.x
