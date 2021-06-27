@@ -10,8 +10,6 @@ public class Grid : MonoBehaviour
     public List<Vector2> TestBlocks = new List<Vector2>();
     public Transform StartPoint;
 
-    private List<Vector2Int> previewPositions = new List<Vector2Int>();
-
     private Cell[,] Cells;
     private List<Tuple<int, int>> Blocks;
     private TetrisGrid TetrisGrid;
@@ -57,18 +55,11 @@ public class Grid : MonoBehaviour
 
     private void OnGameLost()
     {
-        /*maxScore = PlayerPrefs.GetInt("HighSchore", 0);
-        if (maxScore < points)
-        {
-            maxScore = points;
-            PlayerPrefs.SetInt("HighSchore", maxScore);
-            maxScoreText.text = PlayerPrefs.GetInt("HighScore").ToString();
-        }*/
     }
 
-    public void CheckForLines()
+    public void CheckForLines(List<Vector2Int> modifiedBlocks)
     {
-        List<int> completeLinesIndexes = TetrisGrid.CheckForLines();
+        List<int> completeLinesIndexes = TetrisGrid.CheckForLines(modifiedBlocks);
         DestroyLines(completeLinesIndexes);
     }
 
@@ -82,7 +73,6 @@ public class Grid : MonoBehaviour
         else
         {
             Combo++;
-            PreviousTetrisGrid = TetrisGrid.Copy();
             switch (numberOfLines)
             {
                 case 1:
@@ -121,8 +111,6 @@ public class Grid : MonoBehaviour
             pointsText.text = Convert.ToString(points);
             Debug.Log(points);
             TetrisGrid.DestroyLines(indexes);
-            RenderGrid();
-            PreviousTetrisGrid = null;
         }
         if (Combo < 1)
         {
@@ -167,32 +155,29 @@ public class Grid : MonoBehaviour
     public void SetNextPreview(Tetrimino nextPiece)
     {
         var startPosition = GridLocator.GetGridPosition(StartPoint, transform);
-        previewPositions.Clear();
+        var nextPreview = new List<Vector2Int>();
         var layout = TetriminoLogic.Layouts[nextPiece];
         foreach (var tile in layout)
         {
-            previewPositions.Add(startPosition + tile);
+            nextPreview.Add(startPosition + tile);
         }
+        TetrisGrid.SetNextPreview(nextPreview);
     }
 
     public void UpdatePreview(Piece piece)
     {
-        PreviousTetrisGrid = TetrisGrid.Copy();
-        TetrisGrid.ClearPreviews();
-
-        TetrisGrid.SetPoints(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino, previewPositions, false, true);
-        RenderGrid();
-        PreviousTetrisGrid = null;
+        var isDifferent = TetrisGrid.AddPreviewBlocks(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino);
+        if (isDifferent)
+        {
+            RenderGrid();
+        }
     }
 
     public void PlaceBlocks(Piece piece)
     {
-        PreviousTetrisGrid = TetrisGrid.Copy();
-        TetrisGrid.ClearPreviews();
-        TetrisGrid.SetPoints(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino, previewPositions, true, false);
+        var modifiedBlocks = TetrisGrid.AddBlocks(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino);
+        CheckForLines(modifiedBlocks);
         RenderGrid();
-        CheckForLines();
-        PreviousTetrisGrid = null;
     }
 
     public bool IsSpaceAvailable(List<Vector2Int> positions)
@@ -213,10 +198,14 @@ public class TetrisGrid
     public static readonly int VISUAL_HEIGHT = 20;
 
     private TetrisCell[,] Cells;
+    private HashSet<Vector2Int> previews;
+    private HashSet<Vector2Int> nextPreview;
 
     public TetrisGrid(List<Tuple<int, int>> blocks = null)
     {
         Cells = new TetrisCell[HEIGHT, WIDTH];
+        previews = new HashSet<Vector2Int>();
+        nextPreview = new HashSet<Vector2Int>();
 
         for (int i = 0; i < HEIGHT; i++)
         {
@@ -240,33 +229,54 @@ public class TetrisGrid
         }
     }
 
-    public void SetPoints(List<Vector2Int> points, Tetrimino tetrimino, List<Vector2Int> previewPoints, bool isPresent = false, bool isPreview = false)
+    public List<Vector2Int> AddBlocks(List<Vector2Int> points, Tetrimino tetrimino)
     {
         if (IsOutOfBounds(points))
         {
             // Do nothing
-            return;
+            return new List<Vector2Int>();
         }
+
+        ClearPreviews();
 
         var lowest = GetLowestPoints(points);
         foreach (var point in lowest)
         {
-            if (isPreview && !Cells[point.y, point.x].Present)
-            {
-                Cells[point.y, point.x].SetPreview(tetrimino);
-            }
-            else if (isPresent)
-            {
-                Cells[point.y, point.x].SetValue(tetrimino);
-            }
+            Cells[point.y, point.x].SetValue(tetrimino);
+        }
+        return lowest;
+    }
+
+    public bool AddPreviewBlocks(List<Vector2Int> points, Tetrimino tetrimino)
+    {
+        if (IsOutOfBounds(points))
+        {
+            // Do nothing
+            return false;
         }
 
-        // Preview
-        var previewLowest = GetLowestPoints(previewPoints, true);
-        foreach (var point in previewLowest)
+        var lowest = GetLowestPoints(points);
+
+        if (previews.Count == 0 || !previews.All(lowest.Contains))
         {
-            Cells[point.y, point.x].SetPreview(null);
+            ClearPreviews();
+            foreach (var point in lowest)
+            {
+                Cells[point.y, point.x].SetPreview(tetrimino);
+                previews.Add(point);
+            }
+
+            // Preview
+            var previewLowest = GetLowestPoints(nextPreview, true);
+            foreach (var point in previewLowest)
+            {
+                previews.Add(point);
+                Cells[point.y, point.x].SetPreview(null);
+            }
+            return true;
         }
+
+        return false;
     }
 
     public bool CheckSpace(List<Vector2Int> points)
@@ -282,15 +292,15 @@ public class TetrisGrid
         return Cells[y, x];
     }
 
-    public List<int> CheckForLines()
+    public List<int> CheckForLines(List<Vector2Int> modifiedBlocks)
     {
         List<int> completeLinesIndexes = new List<int>();
-        for (int i = 0; i < HEIGHT; i++)
+        foreach (var point in modifiedBlocks)
         {
             bool isComplete = true;
             for (int j = 0; j < WIDTH; j++)
             {
-                if (!Cells[i, j].Present)
+                if (!Cells[point.y, j].Present)
                 {
                     isComplete = false;
                     break;
@@ -298,7 +308,7 @@ public class TetrisGrid
             }
             if (isComplete)
             {
-                completeLinesIndexes.Add(i);
+                completeLinesIndexes.Add(point.y);
             }
         }
         return completeLinesIndexes;
@@ -345,16 +355,11 @@ public class TetrisGrid
 
     public void ClearPreviews()
     {
-        for (int i = 0; i < HEIGHT; i++)
+        foreach (var preview in previews)
         {
-            for (int j = 0; j < WIDTH; j++)
-            {
-                if (Cells[i, j].Preview)
-                {
-                    Cells[i, j].Clear();
-                }
-            }
+            Cells[preview.y, preview.x].Clear();
         }
+        previews.Clear();
     }
 
     private bool IsOutOfBounds(int x, int y)
@@ -368,7 +373,7 @@ public class TetrisGrid
         return points.Any(point => IsOutOfBounds(point.x, point.y));
     }
 
-    public List<Vector2Int> GetLowestPoints(List<Vector2Int> points, bool includePreviews = false)
+    public List<Vector2Int> GetLowestPoints(IEnumerable<Vector2Int> points, bool includePreviews = false)
     {
         var offset = 0;
         while (offset < HEIGHT)
@@ -390,6 +395,11 @@ public class TetrisGrid
             offset++;
         }
         return points.Select(point => new Vector2Int(point.x, point.y - offset)).ToList();
+    }
+
+    public void SetNextPreview(List<Vector2Int> points)
+    {
+        nextPreview = new HashSet<Vector2Int>(points);
     }
 }
 
