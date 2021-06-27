@@ -1,11 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourSingleton<GameManager>
 {
     public GameObject screenTransition;
+    public GameObject endScreen;
+    public bool gameLost = false;
+
+    public UnityEvent GameLost;
+
+    private void Start()
+    {
+        if (GameLost == null)
+        {
+            GameLost = new UnityEvent();
+        }
+    }
+
     public void StartScreenTransition()
     {
         screenTransition.SetActive(true);
@@ -14,5 +28,17 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void EndGame()
+    {
+        endScreen.SetActive(true);
+        gameLost = true;
+        GameLost.Invoke();
     }
 }

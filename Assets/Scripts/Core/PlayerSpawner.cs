@@ -37,8 +37,7 @@ public class PlayerSpawner : MonoBehaviour
         var height = Player.transform.position.y - Grid.transform.position.y;
         if (height >= TetrisGrid.VISUAL_HEIGHT)
         {
-            Debug.Log("F");
-            // TO-DO: Lose the game
+            GameManager.Instance.EndGame();
         }
 
         Lifespan.StartPieceLifespan(Player, Grid);
