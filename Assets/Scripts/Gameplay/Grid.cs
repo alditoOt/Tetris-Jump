@@ -13,7 +13,6 @@ public class Grid : MonoBehaviour
     private Cell[,] Cells;
     private List<Tuple<int, int>> Blocks;
     private TetrisGrid TetrisGrid;
-    private TetrisGrid PreviousTetrisGrid;
     private int Combo = 0;
     public int points = 0;
     public int totalLines = 0;
@@ -128,27 +127,24 @@ public class Grid : MonoBehaviour
         {
             for (int j = 0; j < TetrisGrid.WIDTH; j++)
             {
-                RenderCell(j, i, TetrisGrid.GetCell(j, i), PreviousTetrisGrid?.GetCell(j, i));
+                RenderCell(j, i, TetrisGrid.GetCell(j, i));
             }
         }
     }
 
-    private void RenderCell(int x, int y, TetrisCell cell, TetrisCell previousCell)
+    private void RenderCell(int x, int y, TetrisCell cell)
     {
-        if (previousCell == null || (!cell.Equals(previousCell)))
+        if (cell.Present)
         {
-            if (cell.Present)
-            {
-                Cells[y, x].SetBlock(cell.Tetrimino);
-            }
-            else if (cell.Preview)
-            {
-                Cells[y, x].SetPreview(cell.Tetrimino);
-            }
-            else
-            {
-                Cells[y, x].Clear();
-            }
+            Cells[y, x].SetBlock(cell.Tetrimino);
+        }
+        else if (cell.Preview)
+        {
+            Cells[y, x].SetPreview(cell.Tetrimino);
+        }
+        else
+        {
+            Cells[y, x].Clear();
         }
     }
 
@@ -295,12 +291,12 @@ public class TetrisGrid
     public List<int> CheckForLines(List<Vector2Int> modifiedBlocks)
     {
         List<int> completeLinesIndexes = new List<int>();
-        foreach (var point in modifiedBlocks)
+        foreach (var modifiedY in modifiedBlocks.Select(m => m.y).Distinct())
         {
             bool isComplete = true;
             for (int j = 0; j < WIDTH; j++)
             {
-                if (!Cells[point.y, j].Present)
+                if (!Cells[modifiedY, j].Present)
                 {
                     isComplete = false;
                     break;
@@ -308,7 +304,7 @@ public class TetrisGrid
             }
             if (isComplete)
             {
-                completeLinesIndexes.Add(point.y);
+                completeLinesIndexes.Add(modifiedY);
             }
         }
         return completeLinesIndexes;
