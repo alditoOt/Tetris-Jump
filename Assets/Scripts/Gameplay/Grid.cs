@@ -15,7 +15,7 @@ public class Grid : MonoBehaviour
     private TetrisGrid PreviousTetrisGrid;
     private int Combo = 0;
     private int points = 0;
-    private int totalLines = 0;
+    public int totalLines = 0;
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI linesAmount;
     public TextMeshProUGUI tetrisFX;
