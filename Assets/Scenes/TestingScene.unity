@@ -1429,38 +1429,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 626228406123094615, guid: b23cb4cbb4d233b4d90d5a98fcc72d73, type: 3}
-      propertyPath: sounds.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 626228406123094615, guid: b23cb4cbb4d233b4d90d5a98fcc72d73, type: 3}
-      propertyPath: sounds.Array.data[3].name
-      value: Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 626228406123094615, guid: b23cb4cbb4d233b4d90d5a98fcc72d73, type: 3}
-      propertyPath: sounds.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 44954392040d82b429f7450b804973f5, type: 3}
-    - target: {fileID: 626228406123094615, guid: b23cb4cbb4d233b4d90d5a98fcc72d73, type: 3}
-      propertyPath: sounds.Array.data[3].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 626228406123094615, guid: b23cb4cbb4d233b4d90d5a98fcc72d73, type: 3}
-      propertyPath: sounds.Array.data[3].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 626228406123094615, guid: b23cb4cbb4d233b4d90d5a98fcc72d73, type: 3}
-      propertyPath: sounds.Array.data[3].pitchMinRange
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 626228406123094615, guid: b23cb4cbb4d233b4d90d5a98fcc72d73, type: 3}
-      propertyPath: sounds.Array.data[3].pitchMaxRange
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 626228406123094615, guid: b23cb4cbb4d233b4d90d5a98fcc72d73, type: 3}
-      propertyPath: sounds.Array.data[3].loop
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b23cb4cbb4d233b4d90d5a98fcc72d73, type: 3}
 --- !u!1001 &3234036758706095123

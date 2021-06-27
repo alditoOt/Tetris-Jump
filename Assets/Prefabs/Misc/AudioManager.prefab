@@ -68,4 +68,12 @@ MonoBehaviour:
     pitchMaxRange: 1
     loop: 1
     source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 44954392040d82b429f7450b804973f5, type: 3}
+    volume: 1
+    pitch: 1
+    pitchMinRange: 1
+    pitchMaxRange: 1
+    loop: 0
+    source: {fileID: 0}
   lowVolume: 0.1
