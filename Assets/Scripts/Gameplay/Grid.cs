@@ -10,6 +10,8 @@ public class Grid : MonoBehaviour
     public List<Vector2> TestBlocks = new List<Vector2>();
     public Transform StartPoint;
 
+    private List<Vector2Int> previewPositions = new List<Vector2Int>();
+
     private Cell[,] Cells;
     private List<Tuple<int, int>> Blocks;
     private TetrisGrid TetrisGrid;
@@ -158,11 +160,23 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void UpdatePreview(List<Vector2Int> positions, Tetrimino tetrimino)
+    public void SetNextPreview(Tetrimino nextPiece)
+    {
+        var startPosition = GridLocator.GetGridPosition(StartPoint, transform);
+        previewPositions.Clear();
+        var layout = TetriminoLogic.Layouts[nextPiece];
+        foreach (var tile in layout)
+        {
+            previewPositions.Add(startPosition + tile);
+        }
+    }
+
+    public void UpdatePreview(Piece piece)
     {
         PreviousTetrisGrid = TetrisGrid.Copy();
         TetrisGrid.ClearPreviews();
-        TetrisGrid.SetPoints(positions, tetrimino, false, true);
+
+        TetrisGrid.SetPoints(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino, previewPositions, false, true);
         RenderGrid();
         PreviousTetrisGrid = null;
     }
@@ -171,7 +185,7 @@ public class Grid : MonoBehaviour
     {
         PreviousTetrisGrid = TetrisGrid.Copy();
         TetrisGrid.ClearPreviews();
-        TetrisGrid.SetPoints(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino, true, false);
+        TetrisGrid.SetPoints(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino, previewPositions, true, false);
         RenderGrid();
         CheckForLines();
         PreviousTetrisGrid = null;
@@ -222,7 +236,7 @@ public class TetrisGrid
         }
     }
 
-    public void SetPoints(List<Vector2Int> points, Tetrimino tetrimino, bool isPresent = false, bool isPreview = false)
+    public void SetPoints(List<Vector2Int> points, Tetrimino tetrimino, List<Vector2Int> previewPoints, bool isPresent = false, bool isPreview = false)
     {
         if (IsOutOfBounds(points))
         {
@@ -241,6 +255,13 @@ public class TetrisGrid
             {
                 Cells[point.y, point.x].SetValue(tetrimino);
             }
+        }
+
+        // Preview
+        var previewLowest = GetLowestPoints(previewPoints, true);
+        foreach (var point in previewLowest)
+        {
+            Cells[point.y, point.x].SetPreview(null);
         }
     }
 
@@ -343,7 +364,7 @@ public class TetrisGrid
         return points.Any(point => IsOutOfBounds(point.x, point.y));
     }
 
-    public List<Vector2Int> GetLowestPoints(List<Vector2Int> points)
+    public List<Vector2Int> GetLowestPoints(List<Vector2Int> points, bool includePreviews = false)
     {
         var offset = 0;
         while (offset < HEIGHT)
@@ -351,7 +372,8 @@ public class TetrisGrid
             var hasCollided = false;
             foreach (var point in points)
             {
-                if (point.y - offset <= 0 || Cells[point.y - offset - 1, point.x].Present)
+                if (point.y - offset <= 0 || Cells[point.y - offset - 1, point.x].Present ||
+                    (includePreviews && Cells[point.y - offset - 1, point.x].Preview))
                 {
                     hasCollided = true;
                     break;

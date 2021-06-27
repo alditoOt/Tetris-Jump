@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 5737707144590109358}
   - component: {fileID: 5737707144590109359}
   - component: {fileID: 5737707145519696014}
-  - component: {fileID: 4654153166955935328}
+  - component: {fileID: 1336450500}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -240,8 +240,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: -1117002021726310201, guid: 6a20968cab1f02d45aa6291a4deabccf, type: 3}
   TestBlocks: []
-  StartPoint: {fileID: 0}
+  StartPoint: {fileID: 355279010}
+  points: 0
   totalLines: 0
+  maxScore: 0
   pointsText: {fileID: 0}
   linesAmount: {fileID: 0}
   tetrisFX: {fileID: 0}
@@ -249,7 +251,8 @@ MonoBehaviour:
   doubleLine: {fileID: 0}
   triple: {fileID: 0}
   comboText: {fileID: 0}
---- !u!114 &4654153166955935328
+  maxScoreText: {fileID: 0}
+--- !u!114 &1336450500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,11 +261,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5737707144590109357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375aab294e89a3a4d930471ec4bfbdf8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d7c9ea724c1a6944bf4b8832ea2e8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoint: {fileID: 355279010}
-  Countdown: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &5737707145816062672
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +275,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5737707145816062674}
   - component: {fileID: 5737707145816062673}
+  - component: {fileID: 346651005}
+  - component: {fileID: 346651006}
+  - component: {fileID: 346651007}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -347,3 +352,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &346651005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5737707145816062672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99964a0f15b06ad48a75d8b30c5803d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextPiecesContainer: {fileID: 0}
+--- !u!114 &346651006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5737707145816062672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ce643a6ea2b8445878df66496dbd27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialCooldown: 10
+  cooldownStep: 0.7
+  minCooldown: 3
+  linesPerLevel: 10
+  cooldownUI: {fileID: 0}
+  initialColor: {r: 1, g: 1, b: 1, a: 1}
+  emptyColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &346651007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5737707145816062672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06c01d54d1c71a4f8b404762f809ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  Grid: {fileID: 5737707145519696014}

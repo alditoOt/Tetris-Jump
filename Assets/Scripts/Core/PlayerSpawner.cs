@@ -41,6 +41,9 @@ public class PlayerSpawner : MonoBehaviour
         }
 
         Lifespan.StartPieceLifespan(Player, Grid);
+
+        nextPiece = Generator.GetNextPieces(1)[0];
+        Grid.SetNextPreview(nextPiece);
     }
 
     private void MoveToLowestPoint()
@@ -51,5 +54,9 @@ public class PlayerSpawner : MonoBehaviour
         var offset = lowestPoint[0].y - currentPoint[0].y;
         var newPos = new Vector2(Player.transform.position.x, Player.transform.position.y + offset);
         Player.transform.position = newPos;
+    }
+
+    private void SetNextPreview()
+    {
     }
 }

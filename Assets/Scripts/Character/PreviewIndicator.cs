@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Piece))]
+[RequireComponent(typeof(Grid))]
 public class PreviewIndicator : MonoBehaviour
 {
-    private Piece piece;
+    public PlayerPiece player;
+    private Grid grid;
 
     private void Start()
     {
-        piece = GetComponent<Piece>();
+        grid = GetComponent<Grid>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        piece.Grid.UpdatePreview(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino);
+        grid.UpdatePreview(player.Piece);
     }
 }
