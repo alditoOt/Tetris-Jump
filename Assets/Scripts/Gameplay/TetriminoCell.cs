@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class TetriminoCell : MonoBehaviour
+public abstract class TetriminoCell : MonoBehaviour
 {
     [Header("Tetrimino Sprite")]
     public Sprite T;
@@ -15,14 +16,7 @@ public class TetriminoCell : MonoBehaviour
     public Sprite O;
     public Sprite Empty;
 
-    private SpriteRenderer sr;
-
-    private void Awake()
-    {
-        sr = GetComponent<SpriteRenderer>();
-    }
-
-    public void SetTetrimino(Tetrimino? tetrimino)
+    protected Sprite GetSprite(Tetrimino? tetrimino)
     {
         Sprite sprite = Empty;
         if (tetrimino.HasValue)
@@ -61,6 +55,8 @@ public class TetriminoCell : MonoBehaviour
                     break;
             }
         }
-        sr.sprite = sprite;
+        return sprite;
     }
+
+    public abstract void SetTetrimino(Tetrimino? tetrimino);
 }

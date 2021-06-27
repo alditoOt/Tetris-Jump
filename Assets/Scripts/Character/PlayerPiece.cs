@@ -1,20 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerPiece : MonoBehaviour
 {
-    public Piece Piece;
-    public PlayerGrid Grid;
-    public float cooldown = 10f;
-    public float cooldownModifier = 0.7f;
-    private bool cooldownModified = false;
+    [HideInInspector]
+    public Grid Grid;
 
-    private Coroutine spawningRoutine;
+    [HideInInspector]
+    public Piece Piece;
+
+    public UnityEvent PiecePlaced;
 
     private void Start()
     {
-        spawningRoutine = StartCoroutine(SpawnedPiece());
+        if (PiecePlaced == null)
+        {
+            PiecePlaced = new UnityEvent();
+        }
+        Piece = GetComponentInChildren<Piece>();
     }
 
     public void OnRotateLeft()
@@ -29,16 +34,7 @@ public class PlayerPiece : MonoBehaviour
 
     public void OnPlace()
     {
-        Piece.Grid.PlaceBlocks(Piece.pieceGridLocator.GlobalCurrentTilesPositions(), Piece.Tetrimino);
-        StopCoroutine(spawningRoutine);
-        spawningRoutine = StartCoroutine(SpawnedPiece());
-    }
-
-    private IEnumerator SpawnedPiece()
-    {
-        float currentCooldown = Mathf.Max(cooldown - Piece.Grid.totalLines / 10 * 0.7f, 3f);
-        Grid.RespawnPiece(this, currentCooldown);
-        yield return new WaitForSeconds(currentCooldown);
-        OnPlace();
+        Grid.PlaceBlocks(Piece);
+        PiecePlaced.Invoke();
     }
 }
