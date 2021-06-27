@@ -70,22 +70,22 @@ public class Grid : MonoBehaviour
             switch (numberOfLines)
             {
                 case 1:
-                    points += 40*Combo;
+                    points += 40 + 50*(Combo-1);
                     totalLines += 1;
                     single.gameObject.SetActive(true);
                     break;
                 case 2:
-                    points += 100*Combo;
+                    points += 100 + 50 * (Combo - 1);
                     totalLines += 2;
                     doubleLine.gameObject.SetActive(true);
                     break;
                 case 3:
-                    points += 300*Combo;
+                    points += 300 + 50 * (Combo - 1);
                     totalLines += 3;
                     triple.gameObject.SetActive(true);
                     break;
                 case 4:
-                    points += 1200*Combo;
+                    points += 1200 + 50 * (Combo - 1);
                     totalLines += 4;
                     tetrisFX.gameObject.SetActive(true);
                     break;
@@ -105,7 +105,14 @@ public class Grid : MonoBehaviour
             RenderGrid();
             PreviousTetrisGrid = null;
         }
-        comboText.text = Convert.ToString(Combo);
+        if (Combo < 1)
+        {
+            comboText.text = Convert.ToString(0);
+        }
+        else
+        {
+            comboText.text = Convert.ToString(Combo - 1);
+        }
     }
 
     private void RenderGrid()
