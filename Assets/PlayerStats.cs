@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        GetComponentInChildren<Grid>().LinesDestroyed.AddListener(HandlePoints);
+        GetComponentInChildren<Grid>().LinesChecked.AddListener(HandlePoints);
         GameManager.Instance.SetPoints(Points);
         linesAmount.text = Lines.ToString();
         pointsText.text = Points.ToString();

@@ -14,7 +14,8 @@ public class Grid : MonoBehaviour
     private List<Tuple<int, int>> Blocks;
     private TetrisGrid TetrisGrid;
 
-    public UnityEvent<int> LinesDestroyed;
+    public UnityEvent<int> LinesChecked;
+    public UnityEvent<List<int>> LinesDeleted;
 
     // Start is called before the first frame update
     private void Awake()
@@ -38,9 +39,13 @@ public class Grid : MonoBehaviour
 
     private void Start()
     {
-        if (LinesDestroyed == null)
+        if (LinesChecked == null)
         {
-            LinesDestroyed = new UnityEvent<int>();
+            LinesChecked = new UnityEvent<int>();
+        }
+        if (LinesDeleted == null)
+        {
+            LinesDeleted = new UnityEvent<List<int>>();
         }
         RenderGrid();
         GameManager.Instance.GameLost.AddListener(OnGameLost);
@@ -55,7 +60,8 @@ public class Grid : MonoBehaviour
         List<int> completeLinesIndexes = TetrisGrid.CheckForLines(modifiedBlocks);
 
         TetrisGrid.DestroyLines(completeLinesIndexes);
-        LinesDestroyed.Invoke(completeLinesIndexes.Count);
+        LinesChecked.Invoke(completeLinesIndexes.Count);
+        LinesDeleted.Invoke(completeLinesIndexes);
     }
 
     private void RenderGrid()

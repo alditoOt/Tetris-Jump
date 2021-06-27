@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         if (PlayerPrefs.GetInt("HighScore") < points)
         {
             PlayerPrefs.SetInt("HighScore", points);
+            PlayerPrefs.Save();
         }
     }
 
