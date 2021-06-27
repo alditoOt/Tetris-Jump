@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8585421395757889988}
-  - component: {fileID: 3420519621569395363}
-  - component: {fileID: 5026410369741116732}
-  - component: {fileID: 6215320886249429889}
+  - component: {fileID: 1011356530116340873}
+  - component: {fileID: 1951979161966478130}
+  - component: {fileID: 4920823374952804469}
   m_Layer: 8
   m_Name: Block
   m_TagString: Untagged
@@ -33,7 +33,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3420519621569395363
+--- !u!114 &1011356530116340873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6223015050042671878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e768b3aea5935c4e8553553e24c641d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  T: {fileID: -2998017050332738111, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
+  I: {fileID: -4388849201652050597, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
+  J: {fileID: -3845597429845598469, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
+  L: {fileID: -9117533522614037107, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
+  S: {fileID: -7317489560659768401, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
+  Z: {fileID: 125360517909305836, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
+  O: {fileID: -1397575385918083561, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
+  Empty: {fileID: 3365895340809157560, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
+--- !u!61 &1951979161966478130
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6223015050042671878}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!212 &4920823374952804469
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,49 +130,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5026410369741116732
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6223015050042671878}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.5, y: 0.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &6215320886249429889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6223015050042671878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33ec435a6fdd89441a55f17dc252fa65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  T: {fileID: -2998017050332738111, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
-  I: {fileID: -4388849201652050597, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
-  J: {fileID: -3845597429845598469, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
-  L: {fileID: -9117533522614037107, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
-  S: {fileID: -7317489560659768401, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
-  Z: {fileID: 125360517909305836, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
-  O: {fileID: -1397575385918083561, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}
-  Empty: {fileID: 3365895340809157560, guid: 1fc2ae0245e2c214f87b3bca15f7cd92, type: 3}

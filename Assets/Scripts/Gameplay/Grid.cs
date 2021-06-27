@@ -8,7 +8,7 @@ public class Grid : MonoBehaviour
 {
     public Cell CellPrefab;
     public List<Vector2> TestBlocks = new List<Vector2>();
-    public PlayerGrid pg;
+    public Transform StartPoint;
 
     private Cell[,] Cells;
     private List<Tuple<int, int>> Blocks;
@@ -50,15 +50,14 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         RenderGrid();
+        GameManager.Instance.GameLost.AddListener(OnGameLost);
     }
 
-    private void FixedUpdate()
+    private void OnGameLost()
     {
-        if(pg.gameLost)
-        {
-            finalScore.text = Convert.ToString(points);
-        }
+        finalScore.text = Convert.ToString(points);
     }
+
     public void CheckForLines()
     {
         List<int> completeLinesIndexes = TetrisGrid.CheckForLines();
@@ -79,25 +78,29 @@ public class Grid : MonoBehaviour
             switch (numberOfLines)
             {
                 case 1:
-                    points += 40 + 50*(Combo-1);
+                    points += 40 + 50 * (Combo - 1);
                     totalLines += 1;
                     single.gameObject.SetActive(true);
                     break;
+
                 case 2:
                     points += 100 + 50 * (Combo - 1);
                     totalLines += 2;
                     doubleLine.gameObject.SetActive(true);
                     break;
+
                 case 3:
                     points += 300 + 50 * (Combo - 1);
                     totalLines += 3;
                     triple.gameObject.SetActive(true);
                     break;
+
                 case 4:
                     points += 1200 + 50 * (Combo - 1);
                     totalLines += 4;
                     tetrisFX.gameObject.SetActive(true);
                     break;
+
                 default:
                     break;
             }
@@ -157,11 +160,11 @@ public class Grid : MonoBehaviour
         PreviousTetrisGrid = null;
     }
 
-    public void PlaceBlocks(List<Vector2Int> positions, Tetrimino tetrimino)
+    public void PlaceBlocks(Piece piece)
     {
         PreviousTetrisGrid = TetrisGrid.Copy();
         TetrisGrid.ClearPreviews();
-        TetrisGrid.SetPoints(positions, tetrimino, true, false);
+        TetrisGrid.SetPoints(piece.pieceGridLocator.GlobalCurrentTilesPositions(), piece.Tetrimino, true, false);
         RenderGrid();
         CheckForLines();
         PreviousTetrisGrid = null;
