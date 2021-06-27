@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,9 +14,9 @@ public class MonoBehaviourSingleton<T> : MonoBehaviour
         if (Instance == null)
         {
             Instance = this as T;
-            if(DontDestroy){
-            Object.DontDestroyOnLoad(this.gameObject);
-
+            if (DontDestroy)
+            {
+                Object.DontDestroyOnLoad(this.gameObject);
             }
         }
         else if (Instance != this)

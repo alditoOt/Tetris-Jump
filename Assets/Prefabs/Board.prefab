@@ -376,9 +376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialCooldown: 10
-  cooldownStep: 0.8
-  minCooldown: 2
-  linesPerLevel: 7
+  cooldownStep: 0.5
+  minCooldown: 1
+  linesPerLevel: 5
   cooldownUI: {fileID: 0}
   initialColor: {r: 1, g: 1, b: 1, a: 1}
   emptyColor: {r: 1, g: 0, b: 0, a: 1}
