@@ -1529,6 +1529,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1292199265, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292199265, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_fontSize
+      value: 39.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761435267, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761435268, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761435268, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -449.79468
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761435268, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -110.000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761435268, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -249.9754
+      objectReference: {fileID: 0}
     - target: {fileID: 1761435269, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1545,6 +1573,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -4245881668751691442, guid: fedb149dccbffe843827b67211addd37, type: 3}
+    - target: {fileID: 1761435270, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4931326732085673809, guid: 21e055b2dc86467459fb1dc6a48d737f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
