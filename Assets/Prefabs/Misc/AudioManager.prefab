@@ -76,4 +76,12 @@ MonoBehaviour:
     pitchMaxRange: 1
     loop: 0
     source: {fileID: 0}
+  - name: PieceDrop
+    clip: {fileID: 8300000, guid: 17c010e77631ef746b2ab3f0fbdff454, type: 3}
+    volume: 3
+    pitch: 1
+    pitchMinRange: 1
+    pitchMaxRange: 1
+    loop: 0
+    source: {fileID: 0}
   lowVolume: 0.1

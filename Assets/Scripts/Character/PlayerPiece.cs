@@ -35,5 +35,6 @@ public class PlayerPiece : MonoBehaviour
     {
         Grid.PlaceBlocks(Piece);
         PiecePlaced.Invoke();
+        AudioManager.Instance.Play("PieceDrop");
     }
 }
