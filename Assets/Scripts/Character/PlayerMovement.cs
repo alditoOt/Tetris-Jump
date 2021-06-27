@@ -112,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         jumping = value.Get<float>() == 1;
         if (jumping && isOnGround)
         {
+            AudioManager.Instance.Play("Jump");
             rb.velocity = new Vector2(rb.velocity.x, jump);
             // anim.ResetTrigger("jumping");
             //anim.SetTrigger("jumping");

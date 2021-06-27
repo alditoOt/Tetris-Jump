@@ -243,7 +243,6 @@ MonoBehaviour:
   StartPoint: {fileID: 355279010}
   points: 0
   totalLines: 0
-  maxScore: 0
   pointsText: {fileID: 0}
   linesAmount: {fileID: 0}
   tetrisFX: {fileID: 0}
@@ -251,7 +250,6 @@ MonoBehaviour:
   doubleLine: {fileID: 0}
   triple: {fileID: 0}
   comboText: {fileID: 0}
-  maxScoreText: {fileID: 0}
 --- !u!114 &1336450500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,9 +376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialCooldown: 10
-  cooldownStep: 0.7
-  minCooldown: 3
-  linesPerLevel: 10
+  cooldownStep: 0.8
+  minCooldown: 2
+  linesPerLevel: 7
   cooldownUI: {fileID: 0}
   initialColor: {r: 1, g: 1, b: 1, a: 1}
   emptyColor: {r: 1, g: 0, b: 0, a: 1}
